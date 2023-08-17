@@ -103,8 +103,7 @@ public class test
 							System.out.printf("메뉴를 잘 못 고르셨습니다.\n");
 						}
 					}
-				}
-          while(menu == -1);
+				} while(menu == -1);
         
 				if(money>=menu_price[0])
 				{
