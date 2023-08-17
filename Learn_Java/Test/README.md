@@ -1,6 +1,6 @@
 # VendingMachine
 ## 기본 데이터(C:\Temp\menu.txt)
-5
+5  
 1 물 1500 20  
 2 밥 1000 30  
 3 고기 1700 10  
