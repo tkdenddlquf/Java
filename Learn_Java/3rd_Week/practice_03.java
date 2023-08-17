@@ -145,8 +145,7 @@ public class test
 					{
 						menuflag = false;
 					}	
-				}
-          while(menu == -1);
+				}while(menu == -1);
 			}
 		}
 		System.out.printf("잔돈은 %d원 입니다.\n", money);
