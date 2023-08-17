@@ -1,4 +1,4 @@
-package com.practice;
+package com.test;
 
 import java.io.File;
 import java.io.FileWriter;
