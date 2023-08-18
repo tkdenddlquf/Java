@@ -120,7 +120,7 @@
     byte b = (byte)300; // int의 300을 byte로 강제 타입 변환시 데이터 손실 발생
     byte x = (byte)3.14; // double의 3.14를 byte로 강제 타입 변환시 데이터 손실되어 3만 대입
     ```
-## 입출력
+## 기본 입출력
 - 화면에 데이터 출력
   - println() : () 내부의 내용을 출력한 후 행을 바꾼다.
   - print() : () 내부의 내용을 출력만 하고 행은 바꾸지 않는다.
@@ -137,6 +137,28 @@
 
     System.out.printf("x = %d and pi = %f\n", x, pi); // %d와 %f는 포맷 명시자이며, 각각 x와 pi가 대응된다.
     ```
+- 키보드로 데이터 입력
+  - 프로그램의 첫 행에 다음을 추가해 Scanner 클래스의 경로 이름을 컴파일러에 알린다.
+    ```java
+    import java.util.Scanner;
+    ```
+  - 키보드로 데이터를 입력받으려고 System.in 객체와 연결된 Scanner 객체를 생성한다.
+    ```java
+    Scanner in = new Scanner(System.in);
+    ```
+  - Scanner 클래스가 제공하는 다양한 메서드를 이용해 키보드로 데이터를 입력받는다.
+    ```java
+    int x = in.nextInt(); // 정수를 읽어 변수 x에 대입한다.
+    ```
+  - Scanner 클래스가 제공하는 데이터 입력 메서드
+    - next() : String 타입
+    - nextByte() :  타입
+    - next() :  타입
+    - next() :  타입
+    - next() :  타입
+    - next() :  타입
+    - nextDouble() :  타입
+    - next() : String 타입
 
 
 
