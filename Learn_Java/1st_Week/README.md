@@ -865,6 +865,89 @@
 
 ## 상속과 접근 제어
 - 접근 지정자의 접근 범위
+  |접근 지정자|동일 클래스|다른 패키지|자식 클래스|전체|
+  |-|-|-|-|-|
+  |public|접근 가능|접근 가능|접근 가능|접근 가능|
+  |protected|접근 가능|접근 가능|접근 가능|접근 불가|
+  |default|접근 가능|접근 가능|접근 불가|접근 불가|
+  |private|접근 가능|접근 불가|접근 불가|접근 불가|
+- 접근 지정자 사용 시 주의 사항
+  - private 멤버는 자식 클래스에 상속되지 않는다
+  - 클래스 멤버는 어떤 접근 지정자로도 지정할 수 있지만, 클래스는 protected와 private로 지정할 수 없다
+  - 메서드를 오버라이딩할 때 부모 클래스의 메서드보다 가시성을 더 좁게 할 수는 없다
+
+## final 클래스와 메서드
+- final 클래스
+  - 더 이상 상속될 수 없는 클래스
+  - 대표적인 final 클래스로는 String 클래스
+- final 메서드
+  final 클래스는 내부의 모든 메서드를 오버라이딩할 수 없으므로, 특정 메서드만 오버라이딩하지 않도록 하려면 final 메서드로 선언
+
+## 타입 변환과 다형성
+- 객체의 타입 변환
+  - 참조 타입인 객체도 기초 타입 데이터처럼 타입 변환 가능
+  - 상속 관계일 경우만 타입 변환 가능
+  - 객체 타입 변환도 자동 타입 변환과 강제 타입 변환이 있다
+- 타입 변환
+  ```java
+  public class Person
+  {
+    String name = "사람";
+
+    void whoami()
+    {
+      System.out.println("나는 사람이다");
+    }
+  }
+  ```
+  ```java
+  public class Student extends Person
+  {
+    int number = 7;
+
+    void work()
+    {
+      System.out.println("나는 공부한다");
+    }
+  }
+  ```
+  - 자동 타입 변환
+    ```java
+    Student s = new Student();
+    Person p = s; // 자동으로 타입 변환 p = (Person)s와 동일
+    // p.number = 1;
+    // p.work();
+    // number와 work()는 부모 타입에 없는 멤버이므로 부모 타입 변수에서 볼 수 없다
+    p.whoami(); // Person 타입 멤버이므로 호출 가능
+    ```
+  - 강제 타입 변환
+    ```java
+    // 오류 발생
+    Person p = new Person();
+    Student s = (Student)p;
+    
+    // 강제 타입 변환 가능
+    Student s1 = new Student();
+    Person p1 = s1;
+    Student s2 = (Student)p1; // 부모 타입 변수지만 자식 객체를 가리킨다
+    ```
+- 타입 변환된 객체의 구별
+  ```
+  // 변수 : 객체를 참조하는 변수
+  // instanceof : boolean 값을 반환
+  // 타입 : 클래스 이름 혹은 인터페이스 이름
+  변수 instanceof 타입
+  ```
+- 타입 변환을 이용한 다형성
+  ```java
+  static void downcast1(Person p) { } // 인자로 Person 타입과 Student 타입 모두 받는 게 가능
+  static void downcast2(Student t) { } // 인자로 Student 타입만 받는 게 가능
+  ```
+
+
+
+
+
 
 
 
