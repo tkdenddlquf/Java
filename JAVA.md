@@ -30,18 +30,20 @@
 - 대표적인 자바 통합 개발 환경은 이클립스, 넷빈즈(NetBeans), 인텔리J 아이디어(IntelliJ IDEA) 등이 있다
 
 ## 유용한 단축키
-- Ctrl + 1 : 코드를 문맥에 맞게 빠르게 교정
-- Ctrl + Shift + O : 자동으로 import 문 추가
-- Ctrl + Space Bar : 주어진 단어나 문장으로 시작하는 메서드나 변수 표시
-- Ctrl + / : 주석 처리, 해체
-- Ctrl + Shift + F : 코드의 내용을 보기 좋겍 포맷팅
-- Ctrl + F11 : 에디터 뷰에 있는 클래스 실행
-- Alt + Shift + R : 선택한 이름을 일괄 변경
-- Alt + Shift + Z : 선택한 블록을 try~catch, for, while 문 등으로 자동 완성
-- F3 : 메서드, 변수를 선택하고 누으면 해당 메서드가 선언된 곳으로 이동
-- 'sysout' + Ctrl + Space Bar : System.out.println() 삽입
-- Ctrl + Shift + X / Ctrl + Shift + Y : 소문자를 대문자로, 대문자를 소문자로 치환
-- Ctrl + D : 한 행 삭제
+|단축키|기능|
+|-|-|
+|Ctrl + 1|코드를 문맥에 맞게 빠르게 교정|
+|Ctrl + Shift + O|자동으로 import 문 추가|
+|Ctrl + Space Bar|주어진 단어나 문장으로 시작하는 메서드나 변수 표시|
+|Ctrl + /|주석 처리, 해체|
+|Ctrl + Shift + F|코드의 내용을 보기 좋겍 포맷팅|
+|Ctrl + F11|에디터 뷰에 있는 클래스 실행|
+|Alt + Shift + R|선택한 이름을 일괄 변경|
+|Alt + Shift + Z|선택한 블록을 try~catch, for, while 문 등으로 자동 완성|
+|F3|메서드, 변수를 선택하고 누으면 해당 메서드가 선언된 곳으로 이동|
+|'sysout' + Ctrl + Space Bar|System.out.println() 삽입|
+|Ctrl + Shift + X / Ctrl + Shift + Y|소문자를 대문자로, 대문자를 소문자로 치환|
+|Ctrl + D|한 행 삭제|
 
 ## 구조
 파일 → 클래스 → 메서드 → 실행문
@@ -57,12 +59,14 @@
   - 자바 키워드를 사용하면 안 된다
   - 길이에 제한이 없음
 - 자바 키워드
-  - 데이터 타입 : byte, char, short, int, long, float, double, boolean
-  - 접근 지정자 : private, protected, public
-  - 제어문 : if, else, for, while, do, break, continue, switch, case
-  - 클래스와 객체 : class, interface, enum, extends, implements, new, this, super, instanceof, null
-  - 예외 처리 : try, catch, finally, throw, throws
-  - 기타 : abstract, assert, const, default, false, final, import, native, package, return, static, strictfp, synchronized, transient, true, void, volatile
+  |분류|키워드|
+  |-|-|
+  |데이터 타입|byte, char, short, int, long, float, double, boolean|
+  |접근 지정자|private, protected, public|
+  |제어문|if, else, for, while, do, break, continue, switch, case|
+  |클래스와 객체|class, interface, enum, extends, implements, new, this, super, instanceof, null|
+  |예외 처리|try, catch, finally, throw, throws|
+  |기타|abstract, assert, const, default, false, final, import, native, package, return, static, strictfp, synchronized, transient, true, void, volatile|
 - 관례
   - 변수와 메서드는 모두 소문자로 표기하지만, 복합 단어일 때는 두 번째 단어부터 단어의 첫 자만 대문자로 표기
   - 클래스와 인터페이스는 첫 자만 대문자로 표기하고 나머지는 소문자로 표기하지만, 복합 단어일 때는 두 번째 단어부터 단어의 첫 자만 대문자로 표기
@@ -179,14 +183,16 @@
     int x = in.nextInt(); // 정수를 읽어 변수 x에 대입
     ```
   - Scanner 클래스가 제공하는 데이터 입력 메서드
-    - next() : String 타입
-    - nextByte() :  byte 타입
-    - nextShort() :  short 타입
-    - nextInt() :  int 타입
-    - nextLong() :  long 타입
-    - nextFloat() :  float 타입
-    - nextDouble() :  double 타입
-    - nextLine() : String 타입
+    |메서드|타입|
+    |-|-|
+    |next()|String|
+    |nextByte()|byte|
+    |nextShort()|short|
+    |nextInt()|int|
+    |nextLong()|long|
+    |nextFloat()|float|
+    |nextDouble()|double|
+    |nextLine()|String|
 
 ## 연산자
 - x + y 에서 x, y는 피연산자 +는 연산자를 의미
@@ -235,10 +241,12 @@
 - 비트, 시프트 연산자
   - 비트 연산자와 시프트 연산자는 정수 타입에만 사용
   - 종류
-    - & : 두 비트가 모두 1일 때만 1이며, 나머지는 모두 0이다.
-    - | : 두 비트가 모두 0일 때만 0이며, 나머지는 모두 1이다.
-    - ^ : 두 비트가 서로 다를 때는 1, 동일할 때는 0이다.
-    - ~ : 1을 0으로, 0을 1로 바꾼다.
+    |기호|의미|
+    |-|-|
+    |&|두 비트가 모두 1일 때만 1이며, 나머지는 모두 0이다|
+    |\||두 비트가 모두 0일 때만 0이며, 나머지는 모두 1이다|
+    |^|두 비트가 서로 다를 때는 1, 동일할 때는 0이다|
+    |~|1을 0으로, 0을 1로 바꾼다|
     ```java
     System.out.printf("%x\n", 0b0101 & 0b0011); // 1
     System.out.printf("%x\n", 0b0101 | 0b0011); // 7
@@ -275,7 +283,7 @@
     |a <<= b|a = a << b와 동일|
   - 부호, 증감 연산자
     - 숫자를 나타내는 기초 타입에 사용하며 피연산자의 부호를 그대로 유지하거나 반전
-    - 증감 연산자는 변수의 위치에 따라 의미가 다르다.
+    - 증감 연산자는 변수의 위치에 따라 의미가 다르다
     - 종류
       |종류|설명|비고|
       |-|-|-|
@@ -286,7 +294,7 @@
       |--x|연산 전 x 값 감소|전위 감소|
       |x--|연산 후 x 값 감소|후위 감소|
   - 조건 연산자
-    - 조건 연산자(?:)는 조건식이 true이면 결과 값은 앞 연산식의 값이 되고 false이면 결과 값은 뒤 연산식의 값이 된다.
+    - 조건 연산자는 조건식이 true이면 결과 값은 앞 연산식의 값이 되고 false이면 결과 값은 뒤 연산식의 값이 된다
     - 조건 연산자도 쇼트서킷 로직을 이용하기 때문에 조건식에 따라 앞 연산식과 뒤 연산식 중 하나만 실행
   - 우선 순위
     |종류|설명|
@@ -495,8 +503,8 @@
     // increment() 메서드 끝날 때 n은 1
     // increment() 메서드 호출 후 x는 0
     ```
-  - 메서드 오버로딩
-    - 메서드 시그너처(Method Signature) : 메서드 이름과 매개변수의 개수, 데이터 타입, 순서를 의미
+  - 메서드 시그너처
+    - 메서드 이름과 매개변수의 개수, 데이터 타입, 순서를 의미
     - 메서드 이름은 같지만 메서드 시그니처가 다른 메서드를 정의하는 것을 메서드 오버로딩(Method Overloading)이라고 한다.
 
 ## 클래스
