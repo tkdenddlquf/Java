@@ -163,29 +163,29 @@
     int x = 5;
     double pi = 3.14;
 
-    System.out.printf("x = %d and pi = %f\n", x, pi); // %d와 %f는 포맷 명시자이며, 각각 x와 pi가 대응된다.
+    System.out.printf("x = %d and pi = %f\n", x, pi); // %d와 %f는 포맷 명시자이며, 각각 x와 pi가 대응
     ```
 - 키보드로 데이터 입력
-  - 프로그램의 첫 행에 다음을 추가해 Scanner 클래스의 경로 이름을 컴파일러에 알린다.
+  - 프로그램의 첫 행에 다음을 추가해 Scanner 클래스의 경로 이름을 컴파일러에 알림
     ```java
     import java.util.Scanner;
     ```
-  - 키보드로 데이터를 입력받으려고 System.in 객체와 연결된 Scanner 객체를 생성한다.
+  - 키보드로 데이터를 입력받기 위해 System.in 객체와 연결된 Scanner 객체를 생성
     ```java
     Scanner in = new Scanner(System.in);
     ```
-  - Scanner 클래스가 제공하는 다양한 메서드를 이용해 키보드로 데이터를 입력받는다.
+  - Scanner 클래스가 제공하는 다양한 메서드를 이용해 키보드로 데이터를 입력받음
     ```java
-    int x = in.nextInt(); // 정수를 읽어 변수 x에 대입한다.
+    int x = in.nextInt(); // 정수를 읽어 변수 x에 대입
     ```
   - Scanner 클래스가 제공하는 데이터 입력 메서드
     - next() : String 타입
-    - nextByte() :  byte타입
-    - nextShort() :  short타입
-    - nextInt() :  int타입
-    - nextLong() :  long타입
-    - nextFloat() :  float타입
-    - nextDouble() :  double타입
+    - nextByte() :  byte 타입
+    - nextShort() :  short 타입
+    - nextInt() :  int 타입
+    - nextLong() :  long 타입
+    - nextFloat() :  float 타입
+    - nextDouble() :  double 타입
     - nextLine() : String 타입
 
 ## 연산자
