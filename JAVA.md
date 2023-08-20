@@ -1093,7 +1093,8 @@
     public void move() {}
     public void show() {}
   }
-  
+  ```
+  ```java
   Movable m = new Car();
   m.move();
   m.show(); // 오류 발생
