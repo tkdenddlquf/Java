@@ -917,9 +917,41 @@
     - 스트림은 데이터를 송수신하기 위한 통로의 개념
     - 입력 혹은 출력, 한쪽 방향으로만 진행
     - 스트림은 1바이트를 처리하는 바이트 스트림과 2바이트를 처리하는 문자 스트림으로 나뉜다
-      |바이트 스트림|문자 스트림|
-      |-|-|
-      |FileInputStream, FileOutputStream|BufferedReader, BufferedWriter, FileReader, FileWriter|
+      - 바이트 스트림
+        |종류|클래스|
+        |-|-|
+        |InputStream|FileInputStream, PipedInputStream, FilterInputStream, ByteArrayInputStream, SequenceInputStream, StringBufferInputStream, ObjectInputStream, BufferedInputStream, DataInputStream, LintNumberInputStream, PushbackInputStream|
+        |OutputStream|FileOutputStream, PipedOutputStream, FilterOutputStream, ByteArrayOutputStream, ObjectOutputStream, BufferedOutputStream, DataOutputStream, PrintStream|
+        - 주요 메서드
+          - InputStream
+            |메서드|설명|
+            |-|-|
+            |int avaliable()|읽을 수 있는 바이트의 개수를 반환|
+            |void close()|입력 스트림을 닫음|
+            |abstract int read()|1바이트를 읽음|
+            |int read(byte b[])|1바이트씩 읽어 b[]에 저장한 후 읽은 개수를 반환|
+            |int read(byte b[], int off, int len)|len만큼 읽어 b[]의 off 위치에 저장한 후 읽은 개수 반환|
+            |long skip(long n)|입력 스트림을 n바이트 만큼 건너뜀|
+          - OutputStream
+            |메서드|설명|
+            |-|-|
+            |void close()|출력 스트림을 닫음|
+            |void flush()|출력하기 위해 버퍼를 비움|
+            |abstract void write(int b)|b 값을 바이트로 변환해서 씀|
+            |void write(byte b[])|b[] 값을 바이트로 변환해서 씀|
+            |void write(byte b[], int off, int len)|b[] 값을 바이트로 변환해서 off 위치부터 len 만큼 씀|
+          - InputStream과 OutputStream
+            - read( ) 메서드의 반환 값은 0~255의 ASCII 값이며, 더 이상 읽을 데이터가 없을 때는 -1을 반환
+            - read( ) 메서드는 int 타입을 반환
+            - write( ) 메서드에서 인수가 배열일 때는 byte[ ], 배열이 아닐 때는 int 타입
+            - 대부분의  운영체제나 JVM은 표준 출력 장치를 효율적으로 관리하려고 버퍼를 사용
+            - BufferedStream이 아니지만 System.out은 표준 출력이므로 버퍼를 사용
+            - System.out을 사용해 출력할 때는 버퍼를 비우기 위하여 flush( ) 호출 필요
+      - 문자 스트림
+        |종류|클래스|
+        |-|-|
+        |InputStream|BufferedReader, CharArrayReader, InputStreamReader, FilterReader, PipedReader, StringReader, FileReader|
+        |OutputStream|BufferedWriter, CharArrayWriter, OutputStreamWriter, FilterWriter, PipedWriter, StringWriter, FileWriter|
     - 한글은 2바이트이므로 문자 스트림을 사용하는 것이 더 편리
   - 기본 과정
     - 파일 열기 → 파일 쓰기 또는 읽기 → 파일 닫기
