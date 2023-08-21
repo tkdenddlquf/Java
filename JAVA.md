@@ -131,120 +131,6 @@
     byte b = (byte)300; // int의 300을 byte로 강제 타입 변환시 데이터 손실 발생
     byte x = (byte)3.14; // double의 3.14를 byte로 강제 타입 변환시 데이터 손실되어 3만 대입
     ```
-## 입출력
-- 화면에 데이터 출력
-  - println() : () 내부의 내용을 출력한 후 행을 바꾼다
-  - print() : () 내부의 내용을 출력만 하고 행은 바꾸지 않는다
-  - printf() : 포맷을 지정해서 출력
-    - 정수
-      |포맷 명시자|형식|비고|
-      |-|-|-|
-      |%d|10진수||
-      |%o|8진수||
-      |%x|16진수||
-      |%c|문자||
-      |%5d|5자리|빈자리는 공백 처리|
-      |%-5d|5자리|빈자리는 공백 처리, 왼쪽 정렬|
-      |%05d|5자리|빈자리는 0으로 채운다|
-    - 문자열
-      |포맷 명시자|형식|비고|
-      |-|-|-|
-      |%s|문자열||
-      |%5s|5자리|빈자리는 공백 처리|
-      |%-5s|5자리|빈자리는 공백 처리, 왼쪽 정렬|
-    - 실수
-      |포맷 명시자|형식|비고|
-      |-|-|-|
-      |%f|10진수||
-      |%e|지수||
-      |%4.1f|4자리|소수점 이하 1자리|
-      |%-4.1f|4자리|소수점 이하 1자리, 왼쪽 정렬|
-      |%04.1f|4자리|소수점 이하 1자리, 빈자리는 0으로 채운다|
-    ```java
-    // 기본 형식
-    // System.out.printf("포맷 명시자", 데이터, 데이터, ...);
-
-    int x = 5;
-    double pi = 3.14;
-
-    System.out.printf("x = %d and pi = %f\n", x, pi); // %d와 %f는 포맷 명시자이며, 각각 x와 pi가 대응
-    ```
-- 키보드로 데이터 입력
-  - 프로그램의 첫 행에 다음을 추가해 Scanner 클래스의 경로 이름을 컴파일러에 알림
-    ```java
-    import java.util.Scanner;
-    ```
-  - 키보드로 데이터를 입력받기 위해 System.in 객체와 연결된 Scanner 객체를 생성
-    ```java
-    Scanner in = new Scanner(System.in);
-    ```
-  - Scanner 클래스가 제공하는 다양한 메서드를 이용해 키보드로 데이터를 입력받음
-    ```java
-    int x = in.nextInt(); // 정수를 읽어 변수 x에 대입
-    ```
-  - Scanner 클래스가 제공하는 데이터 입력 메서드
-    |메서드|타입|
-    |-|-|
-    |next()|String|
-    |nextByte()|byte|
-    |nextShort()|short|
-    |nextInt()|int|
-    |nextLong()|long|
-    |nextFloat()|float|
-    |nextDouble()|double|
-    |nextLine()|String|
-- 파일 입출력
-  - 스트림(stream)
-    - 스트림은 데이터를 송수신하기 위한 통로의 개념
-    - 입력 혹은 출력, 한쪽 방향으로만 진행
-    - 스트림은 1바이트를 처리하는 바이트 스트림과 2바이트를 처리하는 문자 스트림으로 나뉜다
-      |바이트 스트림|문자 스트림|
-      |-|-|
-      |FileInputStream, FileOutputStream|BufferedReader, BufferedWriter, FileReader, FileWriter|
-    - 한글은 2바이트이므로 문자 스트림을 사용하는 것이 더 편리
-  - 기본 과정
-    - 파일 열기 → 파일 쓰기 또는 읽기 → 파일 닫기
-    - 파일 열기
-      ```
-      FileInputStream 변수명 = new FileInputStream("파일명"); // 1바이트 읽기
-      BufferedReader 변수명2 = new BufferedReader(변수명); // 행 단위 읽기
-      ```
-      ```
-      FileOutputStream 변수명 = new FileOutputStream("파일명"); // 1바이트 쓰기
-      BufferedWriter 변수명2 = new BufferedWriter(변수명); // 행 단위 쓰기
-      ```
-    - 파일 처리
-      - 데이터를 쓰거나 파일로부터 데이터를 읽어올 수 있는 상태
-    - 파일 닫기
-      ```
-      변수명.close();
-      ```
-  - 주의 사항
-    - 파일을 읽을 때 발생될 예외 처리를 위해 throws Exception 문을 반드시 추가
-    - 파일 경로 또한 문자열이므로 폴더를 구분하기 위해 /를 사용한다면 하나만 넣어도 되지만 \를 사용하려면 \\와 같이 2개를 넣어야 함
-  - 입력
-    - 1바이트씩 읽기
-      - 변수명.read( ) 메소드를 이용하여 1바이트씩 읽기 가능
-      - 파일의 끝인 경우 read( ) 메소드에서 -1반환
-      - 한글의 경우 2바이트를 차지하기 때문에 깨짐
-    - 행 단위로 읽기
-      - 변수명.readLine() 메소드를 이용하여 행 단위로 읽기 가능
-      - 파일의 끝인 경우 null 반환(문자열)
-    - Scanner를 이용한 입력
-      ```java
-      Scanner sc = new Scanner(new File("파일명"));
-      ```
-  - 출력
-    - 1바이트씩 쓰기
-      - 변수명.write( ) 메소드를 이용하여 1바이트씩 쓰기 가능
-      - 출력의 경우 한글이 깨지지 않음
-    - FileWriter를 이용한 출력
-      ```java
-      // 한줄씩 쓰기 가능
-      FileWriter fw = new FileWriter("파일명");
-      fw.write("문자열");
-      fw.close();
-      ```
 
 ## 연산자
 - x + y 에서 x, y는 피연산자 +는 연산자를 의미
@@ -503,6 +389,142 @@
        continue; // continue 다음의 실행문들을 건너뛴다
       }
       ```
+
+## 문자열
+- 문자열의 선언과 생성
+  - 문자열 리터럴은 내부적으로 new String()을 호출해 생성한 객체
+    ```
+    String 변수; // String 타입의 변수 선언
+    변수 = "문자열";
+    // String 변수 = new String("문자열");과 같다
+    ```
+  - 내용이 같은 문자열 리터럴이라면 더 이상 새로운 String 객체를 생성하지 않은 채 기존 리터털을 공유
+    ```java
+    String s1 = "hello";
+    String s2 = "hello";
+    // s1과 s2는 동일한 String 객체를 가리킨다
+    ```
+- 문자열의 비교
+  - ==와 != 연산자는 두 문자열의 내용을 비교하는 것이 아니라 동일한 객체인지 검사
+  - String 클래스에서 제공하는 문자열 비교 메서드
+    |메서드|설명|
+    |-|-|
+    |int compareTo(String s)|문자열을 사전 순으로 비교해 정수 값을 반환|
+    |int compareToIgnoreCase(String s)|대소문자를 무시하고, 문자열을 사전 순으로 비교|
+    |boolean equals(String s)|주어진 문자열 s와 현재 문자열을 비교한 후 true/false를 반환|
+    |boolean equalsIgnoreCase(String s)|주어진 문자열 s와 현재 문자열을 대소문자 구분 없이 비교한 후 true/false를 반환|
+    |char charAt(int index)|index가 지정한 문자를 반환|
+    |String concat(String s)|주어진 문자열 s를 현재 문자열 뒤에 붙인다|
+    |boolean contains(String s)|문자열 s를 포함하는지 조사|
+    |boolean endsWith(String s)|끝나는 문자열이 s인지 조사|
+    |boolean isEmpty()|문자열의 길이가 0이면 true를 반환|
+    |int length()|문자열의 길이를 반환|
+    |boolean startsWith(String s)|시작하는 문자열이 s인지 조사|
+    |String substring(int index)|index부터 시작하는 문자열의 일부를 반환|
+    |String toLowerCase()|문자열을 모두 소문자로 변환|
+    |String toUpperCase()|문자열을 모두 대문자로 변환|
+    |String trim()|문자열 앞뒤에 있는 공백을 제거한 후 반환|
+
+## 배열
+- 원리
+  - 변수들을 연속된 집합체로 모아 놓은 것으로 동일한 이름을 사용하여 인덱스로 각 항목을 구분
+  - 연속된 메모리 공간에 존재하기 때문에 관리하기 편리
+- 선언과 생성
+  - 배열의 선언 (실제는 배열 변수의 선언)
+    ```java
+    int[] scores; // 혹은 int scores[];로 선언
+    // int scores[5];와 같은 선언은 불가
+    ```
+  - 배열의 선언과 생성 (실제는 배열 변수의 선언과 초기화)
+    ```java
+    int[] scores1 = new int[5]; // 5는 배열의 크기
+    int[] scores2 = new int[] { 100, 90, 50, 95, 85 }; // 이처럼 선언 가능
+    
+    // 잘못된 방식
+    int[] scores;
+    scores = { 100, 90, 50, 95, 85 };
+    ```
+- 원소의 접근
+  ```
+  배열이름[인덱스];
+  ```
+- 배열의 크기
+  - 배열이 생성될 때 배열의 크기가 결정
+  - 배열의 length 필드가 배열의 크기를 나타낸다
+- 다차원 배열
+  - 배열의 배열
+    ```java
+    int[][] scores = new int[3][5]; // 2개의 대괄호는 2차원 배열을 표시
+    // 3은 행의 개수, 5는 열의 개수
+    ```
+  - 선언과 초기화
+    ```java
+    int[][] scores = {{ 100, 90, 50, 95, 85 }, { 70, 60, 80, 75, 40 }, { 60, 30, 10, 80, 90 }};
+    ```
+- 동적 배열
+  - 처리할 데이터의 개수가 고정된 경우가 아니라면 정적 배열은 자원을 낭비하거나 프로그램을 다시 컴파일
+  - 자바는 크기가 유동적인 배열을 지원하기 위하여 ArrayList 클래스를 제공
+  - ArrayList 객체 생성
+    ```
+    // 참조타입이 기초 타입이라면 integer, Long, Short, Float, Double 등을 사용
+    ArrayList<참조타입> 참조변수 = new ArrayList<>();
+    ```
+  - ArrayList 원소 접근
+    ```
+    참조변수.add(데이터);
+    참조변수.remove(인덱스번호);
+    참조변수.get(인덱스번호);
+    참조변수.size();
+    ```
+- 응용
+  - 배열을 위한 반복문
+    - for~each 반복문 : JDK 5부터 도입된 것으로 for 문을 개선한 방식. 특정 원소를 나타내기 위한 인덱스를 사용하지 않음
+      ```
+      // 배열_혹은_컬렉션에서 가져올 항목이 있다면 변수에 대입
+      // 배열_혹은_컬렉션에서 가져올 항목이 없다면 for 문 탈출
+      for (데이터타입 변수 : 배열_혹은_컬렉션)
+      {
+        // 실행문
+      }
+      ```
+  - 배열 전달
+    ```java
+    int[] x = new int[] { 0, 1, 2, 3, 4 };
+
+    public increment(int[] n)
+    {
+      n[0] = 1;
+    }
+
+    increment(x); // x[0]의 값이 1로 변경
+    ```
+  - 가변 개수 인수
+    - JDK 5부터는 메서드에도 데이터 타입이 같은 가변 개수(variable length)의 인수를 전달 가능
+    - 한 개의 가변 개수 매개변수만 사용 가능하며 가변 개수 매개변수는 마지막에 위치
+    - 가변 개수 인수를 가진 메서드를 호출하면 내부적으로 배열을 생성하여 처리
+    ```java
+    int[] x = new int[] { 0, 1, 2, 3, 4 };
+  
+    void printN(int... n)
+    {
+      for(int a : n) System.out.println(a);
+    }
+
+    printN(x); // x값을 순서대로 출력
+    ```
+  - 객체의 배열
+    - 객체 배열은 객체를 참조하는 주소를 원소로 구성
+      ```java
+      Ball[] balls = new Ball[5]; // 5개의 Ball 객체를 생성하는 것이 아닌 참조할 변수를 준비
+      ```
+    - 생성자를 호출하여 Ball 객체를 생성해야 함
+      ```java
+      Ball[] balls = new Ball[5];
+
+      for (int i = 0; i < 3; i++) balls[i] = new Ball();
+      ```
+  - 매개변수로 객체 전달
+    - 메서드의 인자로 객체를 받는 경우에도 전달 가능
 
 ## 객체 지향
 - 객체의 개념
@@ -827,142 +849,121 @@
   }
   // name을 호출할 경우 "만국"이 호출된다
   ```
-
-## 문자열
-- 문자열의 선언과 생성
-  - 문자열 리터럴은 내부적으로 new String()을 호출해 생성한 객체
-    ```
-    String 변수; // String 타입의 변수 선언
-    변수 = "문자열";
-    // String 변수 = new String("문자열");과 같다
-    ```
-  - 내용이 같은 문자열 리터럴이라면 더 이상 새로운 String 객체를 생성하지 않은 채 기존 리터털을 공유
-    ```java
-    String s1 = "hello";
-    String s2 = "hello";
-    // s1과 s2는 동일한 String 객체를 가리킨다
-    ```
-- 문자열의 비교
-  - ==와 != 연산자는 두 문자열의 내용을 비교하는 것이 아니라 동일한 객체인지 검사
-  - String 클래스에서 제공하는 문자열 비교 메서드
-    |메서드|설명|
-    |-|-|
-    |int compareTo(String s)|문자열을 사전 순으로 비교해 정수 값을 반환|
-    |int compareToIgnoreCase(String s)|대소문자를 무시하고, 문자열을 사전 순으로 비교|
-    |boolean equals(String s)|주어진 문자열 s와 현재 문자열을 비교한 후 true/false를 반환|
-    |boolean equalsIgnoreCase(String s)|주어진 문자열 s와 현재 문자열을 대소문자 구분 없이 비교한 후 true/false를 반환|
-    |char charAt(int index)|index가 지정한 문자를 반환|
-    |String concat(String s)|주어진 문자열 s를 현재 문자열 뒤에 붙인다|
-    |boolean contains(String s)|문자열 s를 포함하는지 조사|
-    |boolean endsWith(String s)|끝나는 문자열이 s인지 조사|
-    |boolean isEmpty()|문자열의 길이가 0이면 true를 반환|
-    |int length()|문자열의 길이를 반환|
-    |boolean startsWith(String s)|시작하는 문자열이 s인지 조사|
-    |String substring(int index)|index부터 시작하는 문자열의 일부를 반환|
-    |String toLowerCase()|문자열을 모두 소문자로 변환|
-    |String toUpperCase()|문자열을 모두 대문자로 변환|
-    |String trim()|문자열 앞뒤에 있는 공백을 제거한 후 반환|
-
-## 배열
-- 원리
-  - 변수들을 연속된 집합체로 모아 놓은 것으로 동일한 이름을 사용하여 인덱스로 각 항목을 구분
-  - 연속된 메모리 공간에 존재하기 때문에 관리하기 편리
-- 선언과 생성
-  - 배열의 선언 (실제는 배열 변수의 선언)
-    ```java
-    int[] scores; // 혹은 int scores[];로 선언
-    // int scores[5];와 같은 선언은 불가
-    ```
-  - 배열의 선언과 생성 (실제는 배열 변수의 선언과 초기화)
-    ```java
-    int[] scores1 = new int[5]; // 5는 배열의 크기
-    int[] scores2 = new int[] { 100, 90, 50, 95, 85 }; // 이처럼 선언 가능
-    
-    // 잘못된 방식
-    int[] scores;
-    scores = { 100, 90, 50, 95, 85 };
-    ```
-- 원소의 접근
-  ```
-  배열이름[인덱스];
-  ```
-- 배열의 크기
-  - 배열이 생성될 때 배열의 크기가 결정
-  - 배열의 length 필드가 배열의 크기를 나타낸다
-- 다차원 배열
-  - 배열의 배열
-    ```java
-    int[][] scores = new int[3][5]; // 2개의 대괄호는 2차원 배열을 표시
-    // 3은 행의 개수, 5는 열의 개수
-    ```
-  - 선언과 초기화
-    ```java
-    int[][] scores = {{ 100, 90, 50, 95, 85 }, { 70, 60, 80, 75, 40 }, { 60, 30, 10, 80, 90 }};
-    ```
-- 동적 배열
-  - 처리할 데이터의 개수가 고정된 경우가 아니라면 정적 배열은 자원을 낭비하거나 프로그램을 다시 컴파일
-  - 자바는 크기가 유동적인 배열을 지원하기 위하여 ArrayList 클래스를 제공
-  - ArrayList 객체 생성
-    ```
-    // 참조타입이 기초 타입이라면 integer, Long, Short, Float, Double 등을 사용
-    ArrayList<참조타입> 참조변수 = new ArrayList<>();
-    ```
-  - ArrayList 원소 접근
-    ```
-    참조변수.add(데이터);
-    참조변수.remove(인덱스번호);
-    참조변수.get(인덱스번호);
-    참조변수.size();
-    ```
-- 응용
-  - 배열을 위한 반복문
-    - for~each 반복문 : JDK 5부터 도입된 것으로 for 문을 개선한 방식. 특정 원소를 나타내기 위한 인덱스를 사용하지 않음
-      ```
-      // 배열_혹은_컬렉션에서 가져올 항목이 있다면 변수에 대입
-      // 배열_혹은_컬렉션에서 가져올 항목이 없다면 for 문 탈출
-      for (데이터타입 변수 : 배열_혹은_컬렉션)
-      {
-        // 실행문
-      }
-      ```
-  - 배열 전달
-    ```java
-    int[] x = new int[] { 0, 1, 2, 3, 4 };
-
-    public increment(int[] n)
-    {
-      n[0] = 1;
-    }
-
-    increment(x); // x[0]의 값이 1로 변경
-    ```
-  - 가변 개수 인수
-    - JDK 5부터는 메서드에도 데이터 타입이 같은 가변 개수(variable length)의 인수를 전달 가능
-    - 한 개의 가변 개수 매개변수만 사용 가능하며 가변 개수 매개변수는 마지막에 위치
-    - 가변 개수 인수를 가진 메서드를 호출하면 내부적으로 배열을 생성하여 처리
-    ```java
-    int[] x = new int[] { 0, 1, 2, 3, 4 };
   
-    void printN(int... n)
-    {
-      for(int a : n) System.out.println(a);
-    }
+## 입출력
+- 화면에 데이터 출력
+  - println() : () 내부의 내용을 출력한 후 행을 바꾼다
+  - print() : () 내부의 내용을 출력만 하고 행은 바꾸지 않는다
+  - printf() : 포맷을 지정해서 출력
+    - 정수
+      |포맷 명시자|형식|비고|
+      |-|-|-|
+      |%d|10진수||
+      |%o|8진수||
+      |%x|16진수||
+      |%c|문자||
+      |%5d|5자리|빈자리는 공백 처리|
+      |%-5d|5자리|빈자리는 공백 처리, 왼쪽 정렬|
+      |%05d|5자리|빈자리는 0으로 채운다|
+    - 문자열
+      |포맷 명시자|형식|비고|
+      |-|-|-|
+      |%s|문자열||
+      |%5s|5자리|빈자리는 공백 처리|
+      |%-5s|5자리|빈자리는 공백 처리, 왼쪽 정렬|
+    - 실수
+      |포맷 명시자|형식|비고|
+      |-|-|-|
+      |%f|10진수||
+      |%e|지수||
+      |%4.1f|4자리|소수점 이하 1자리|
+      |%-4.1f|4자리|소수점 이하 1자리, 왼쪽 정렬|
+      |%04.1f|4자리|소수점 이하 1자리, 빈자리는 0으로 채운다|
+    ```java
+    // 기본 형식
+    // System.out.printf("포맷 명시자", 데이터, 데이터, ...);
 
-    printN(x); // x값을 순서대로 출력
+    int x = 5;
+    double pi = 3.14;
+
+    System.out.printf("x = %d and pi = %f\n", x, pi); // %d와 %f는 포맷 명시자이며, 각각 x와 pi가 대응
     ```
-  - 객체의 배열
-    - 객체 배열은 객체를 참조하는 주소를 원소로 구성
-      ```java
-      Ball[] balls = new Ball[5]; // 5개의 Ball 객체를 생성하는 것이 아닌 참조할 변수를 준비
+- 키보드로 데이터 입력
+  - 프로그램의 첫 행에 다음을 추가해 Scanner 클래스의 경로 이름을 컴파일러에 알림
+    ```java
+    import java.util.Scanner;
+    ```
+  - 키보드로 데이터를 입력받기 위해 System.in 객체와 연결된 Scanner 객체를 생성
+    ```java
+    Scanner in = new Scanner(System.in);
+    ```
+  - Scanner 클래스가 제공하는 다양한 메서드를 이용해 키보드로 데이터를 입력받음
+    ```java
+    int x = in.nextInt(); // 정수를 읽어 변수 x에 대입
+    ```
+  - Scanner 클래스가 제공하는 데이터 입력 메서드
+    |메서드|타입|
+    |-|-|
+    |next()|String|
+    |nextByte()|byte|
+    |nextShort()|short|
+    |nextInt()|int|
+    |nextLong()|long|
+    |nextFloat()|float|
+    |nextDouble()|double|
+    |nextLine()|String|
+- 파일 입출력
+  - 스트림(stream)
+    - 스트림은 데이터를 송수신하기 위한 통로의 개념
+    - 입력 혹은 출력, 한쪽 방향으로만 진행
+    - 스트림은 1바이트를 처리하는 바이트 스트림과 2바이트를 처리하는 문자 스트림으로 나뉜다
+      |바이트 스트림|문자 스트림|
+      |-|-|
+      |FileInputStream, FileOutputStream|BufferedReader, BufferedWriter, FileReader, FileWriter|
+    - 한글은 2바이트이므로 문자 스트림을 사용하는 것이 더 편리
+  - 기본 과정
+    - 파일 열기 → 파일 쓰기 또는 읽기 → 파일 닫기
+    - 파일 열기
       ```
-    - 생성자를 호출하여 Ball 객체를 생성해야 함
-      ```java
-      Ball[] balls = new Ball[5];
-
-      for (int i = 0; i < 3; i++) balls[i] = new Ball();
+      FileInputStream 변수명 = new FileInputStream("파일명"); // 1바이트 읽기
+      BufferedReader 변수명2 = new BufferedReader(변수명); // 행 단위 읽기
       ```
-  - 매개변수로 객체 전달
-    - 메서드의 인자로 객체를 받는 경우에도 전달 가능
+      ```
+      FileOutputStream 변수명 = new FileOutputStream("파일명"); // 1바이트 쓰기
+      BufferedWriter 변수명2 = new BufferedWriter(변수명); // 행 단위 쓰기
+      ```
+    - 파일 처리
+      - 데이터를 쓰거나 파일로부터 데이터를 읽어올 수 있는 상태
+    - 파일 닫기
+      ```
+      변수명.close();
+      ```
+  - 주의 사항
+    - 파일을 읽을 때 발생될 예외 처리를 위해 throws Exception 문을 반드시 추가
+    - 파일 경로 또한 문자열이므로 폴더를 구분하기 위해 /를 사용한다면 하나만 넣어도 되지만 \를 사용하려면 \\와 같이 2개를 넣어야 함
+  - 입력
+    - 1바이트씩 읽기
+      - 변수명.read( ) 메소드를 이용하여 1바이트씩 읽기 가능
+      - 파일의 끝인 경우 read( ) 메소드에서 -1반환
+      - 한글의 경우 2바이트를 차지하기 때문에 깨짐
+    - 행 단위로 읽기
+      - 변수명.readLine() 메소드를 이용하여 행 단위로 읽기 가능
+      - 파일의 끝인 경우 null 반환(문자열)
+    - Scanner를 이용한 입력
+      ```java
+      Scanner sc = new Scanner(new File("파일명"));
+      ```
+  - 출력
+    - 1바이트씩 쓰기
+      - 변수명.write( ) 메소드를 이용하여 1바이트씩 쓰기 가능
+      - 출력의 경우 한글이 깨지지 않음
+    - FileWriter를 이용한 출력
+      ```java
+      // 한줄씩 쓰기 가능
+      FileWriter fw = new FileWriter("파일명");
+      fw.write("문자열");
+      fw.close();
+      ```
 
 ## 디버깅
 - 오류의 종류
@@ -1155,6 +1156,7 @@
     c.show();
     // 정상 작동
     ```
+    
 ## 예외 처리
 - 의미
   - 오류가 발생할 경우 프로그래머가 작성한 부분이 실행되도록 try~catch로 준비하는 것
