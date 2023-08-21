@@ -935,8 +935,8 @@
         - PrintStream
           - 다양한 데이터 값을 편리하게 표현할 수 있도록 출력 스트림에 기능을 추가한 스트림
           - IOException을 발생하지 않음
-          - 자동 플러시 기능을 제공해 flush( ) 메서드를 호출하지 않고도 버퍼를 비울 수 있음
-          - System.out객체의 println( ), print( ), printf( ) 메서드는 PrintStream으로 출력
+          - 자동 플러시 기능을 제공해 flush() 메서드를 호출하지 않고도 버퍼를 비울 수 있음
+          - System.out객체의 println(), print(), printf() 메서드는 PrintStream으로 출력
         - 주요 메서드
           - InputStream
             |메서드|설명|
@@ -956,61 +956,157 @@
             |void write(byte b[])|b[] 값을 바이트로 변환해서 씀|
             |void write(byte b[], int off, int len)|b[] 값을 바이트로 변환해서 off 위치부터 len 만큼 씀|
           - InputStream과 OutputStream
-            - read( ) 메서드의 반환 값은 0~255의 ASCII 값이며, 더 이상 읽을 데이터가 없을 때는 -1을 반환
-            - read( ) 메서드는 int 타입을 반환
-            - write( ) 메서드에서 인수가 배열일 때는 byte[ ], 배열이 아닐 때는 int 타입
+            - read() 메서드의 반환 값은 0~255의 ASCII 값이며, 더 이상 읽을 데이터가 없을 때는 -1을 반환
+            - read() 메서드는 int 타입을 반환
+            - write() 메서드에서 인수가 배열일 때는 byte[], 배열이 아닐 때는 int 타입
             - 대부분의  운영체제나 JVM은 표준 출력 장치를 효율적으로 관리하려고 버퍼를 사용
             - BufferedStream이 아니지만 System.out은 표준 출력이므로 버퍼를 사용
-            - System.out을 사용해 출력할 때는 버퍼를 비우기 위하여 flush( ) 호출 필요
+            - System.out을 사용해 출력할 때는 버퍼를 비우기 위하여 flush() 호출 필요
       - 문자 스트림
         |종류|클래스|
         |-|-|
-        |InputStream|BufferedReader, CharArrayReader, InputStreamReader, FilterReader, PipedReader, StringReader, FileReader|
+        |InputStream|BufferedReader, CharArrayReader, InputStreamReader, FilterReader, PipedReader, StringReader, FileReader, LintNumberReader, PushbackReader|
         |OutputStream|BufferedWriter, CharArrayWriter, OutputStreamWriter, FilterWriter, PipedWriter, StringWriter, FileWriter|
+        - 기초
+          - Reader와 Writer는 객체를 생성할 수 없는 추상 클래스이기 때문에 Reader와 Writer의 자식인 구현 클래스를 사용
+          - FileReader와 FileWriter는 파일 입출력 클래스로, 파일에서 문자 데이터를 읽거나 파일에 문자 데이터를 저장할 때 사용
+          - InputStreamReader및 OutputStreamWriter는 바이트 스트림과 문자 스트림을 연결하는 브리지 스트림으로 사용
+          - BufferedReader와 BufferedWriter는 데이터를 효율적으로 전송하려고 버퍼로 처리할 때 사용
+        - Reader와 Writer
+          - 추상 메서드인 read(), close()와 write(), flush(), close()를 각각 포함하는 추상 클래스
+          - 문자 스트림 클래스가 제공하는 주요 메서드
+          - Reader
+            |메서드|설명|
+            |-|-|
+            |abstract void close()|입력 스트림을 닫음|
+            |int read()|1개의 문자를 읽음|
+            |int read(char[] cbuf)|문자 단위로 읽어 cbuf[]에 저장한 후 읽은 개수 반환|
+            |abstract int read(char cbuf[], int off, int len)|len만큼 읽어 cbuf[]의 off 위치에 저장한 후 읽은 개수를 반환|
+            |long skip(long n)|입력 스트림을 닫고 관련된 모든 지원을 반납|
+          - Writer
+            |메서드|설명|
+            |-|-|
+            |abstract void close()|스트림을 닫고 관련된 모든 자원 반납|
+            |abstract void flush()|버퍼의 내용 비움|
+            |void write(int c)|c값을 char로 변환해 출력 스트림에 씀|
+            |void write(char cbuf[])|cbuf[] 값을 char로 변환해 출력 스트림에 씀|
+            |abstract void write(char cbuf[], int off, int len)|cbuf[] 값을 char로 변환해 off부터 len만큼 출력 스트림에 씀|
+            |void wrute(String str)|문자열 str을 출력 스트림에 씀|
+      - FileReader와 FileWriter
+        - 시스템에 있는 모든 문자 파일을 읽거나 파일에 쓸 수 있는 기능을 제공
+        - 생성자로 스트림 객체를 생성할 때는 FileNotFoundException 예외 처리 필요
+      - BufferedReader및 BufferedWriter
+        - 스트림의 효율을 높이려고 버퍼를 사용
+        - 추가된 주요 메서드
+          |메서드|설명|
+          |-|-|
+          |Stream(String) lines()|읽은 행을 스트림으로 반환|
+          |String readLine()|한 행을 읽어 문자열로 반환|
+      - InputStreamReader및 OutputStreamReader
+        - 바이트 기반의 InputStream과 OutputStream을 포장해 문자 기반의 Reader와 Writer로 변환하는 클래스
+      - PrintWriter
+        - PrintStream처럼 다양한 데이터 값을 편리하게 표현할 수 있도록 출력 스트림에 기능을 추가한 Writer의 자식 클래스
     - 한글은 2바이트이므로 문자 스트림을 사용하는 것이 더 편리
-  - 기본 과정
-    - 파일 열기 → 파일 쓰기 또는 읽기 → 파일 닫기
-    - 파일 열기
-      ```
-      FileInputStream 변수명 = new FileInputStream("파일명"); // 1바이트 읽기
-      BufferedReader 변수명2 = new BufferedReader(변수명); // 행 단위 읽기
-      ```
-      ```
-      FileOutputStream 변수명 = new FileOutputStream("파일명"); // 1바이트 쓰기
-      BufferedWriter 변수명2 = new BufferedWriter(변수명); // 행 단위 쓰기
-      ```
-    - 파일 처리
-      - 데이터를 쓰거나 파일로부터 데이터를 읽어올 수 있는 상태
-    - 파일 닫기
-      ```
-      변수명.close();
-      ```
-  - 주의 사항
-    - 파일을 읽을 때 발생될 예외 처리를 위해 throws Exception 문을 반드시 추가
-    - 파일 경로 또한 문자열이므로 폴더를 구분하기 위해 /를 사용한다면 하나만 넣어도 되지만 \를 사용하려면 \\와 같이 2개를 넣어야 함
-  - 입력
-    - 1바이트씩 읽기
-      - 변수명.read( ) 메소드를 이용하여 1바이트씩 읽기 가능
-      - 파일의 끝인 경우 read( ) 메소드에서 -1반환
-      - 한글의 경우 2바이트를 차지하기 때문에 깨짐
-    - 행 단위로 읽기
-      - 변수명.readLine() 메소드를 이용하여 행 단위로 읽기 가능
-      - 파일의 끝인 경우 null 반환(문자열)
-    - Scanner를 이용한 입력
-      ```java
-      Scanner sc = new Scanner(new File("파일명"));
-      ```
-  - 출력
-    - 1바이트씩 쓰기
-      - 변수명.write( ) 메소드를 이용하여 1바이트씩 쓰기 가능
-      - 출력의 경우 한글이 깨지지 않음
-    - FileWriter를 이용한 출력
-      ```java
-      // 한줄씩 쓰기 가능
-      FileWriter fw = new FileWriter("파일명");
-      fw.write("문자열");
-      fw.close();
-      ```
+  - 파일 관리
+    - 입출력 스트림은 파일이나 장치를 읽거나 쓰기 위해 사용
+    - 입출력 스트림으로 파일을 생성하거나 삭제하거나 이름을 변경하는 등 관리 기능은 없음
+    - 자바는 파일을 관리하기 위해 File 클래스, Path 인터페이스, Files 클래스, Paths 클래스를 제공
+      - File 클래스
+        - 파일이나 폴더의 경로를 추상화한 클래스로 java.io 패키지에 포함
+        - 파일 유무, 삭제, 접근 권한 조사 등을 수행
+        - 생성자
+          |생성자|설명|
+          |-|-|
+          |File(File parent, String child)|parent 객체 폴더의 child라는 File 객체 생성|
+          |File(String pathname)|pathname에 해단하는 File 객체 생성|
+          |File(String parent, String child)|parent 폴더에 child라는 File 객체 생성|
+          |File(URI uri)|uri 경로에서 File 객체 생성|
+        - 주요 메서드
+          |메서드|설명|
+          |-|-|
+          |boolean canExecute()|실행 하능한 파일인지 여부 반환|
+          |boolean canRead()|읽을 수 있는 파일인지 여부 반환|
+          |boolean canWrite()|쓸 수 있는 파일인지 여부 반환|
+          |boolean createNewFile()|파일을 새로 생성하면 true, 아니면 false 반환|
+          |boolean delete()|파일을 삭제하면 true, 아니면 false 반환|
+          |boolean exists()|파일의 존재 유무 반환|
+          |String getAbsolutePath()|파일의 절대 경로 반환|
+          |String getName()|파일의 이름 반환|
+          |String getPath()|파일의 경로 반환|
+          |boolean isDirectory()|폴더 존재 유무 반환|
+          |boolean isFile()|파일 존재 유무 반환|
+          |long lastModified()|파일의 마지막 수정 시간 반환|
+          |long length()|파일의 크기 반환|
+          |String[] list()|모든 자식 파일과 폴더를 문자열 배열로 반환|
+          |File[] listFiles()|모든 자식 파일과 폴더를 File 배열로 반환|
+          |boolean mkdir()|폴더를 생성하면 true, 아니면 false 반환|
+          |Path toPath()|파일 경로에서 구성한 Path 객체 반환|
+      - Path 인터페이스
+        - 운영체제에 따라 일관성 없이 동작하는 File클래스를 대체
+        - 기존 File 객체도 File 클래스의 toPath() 메서드를 이용해 Path 객체로 변환 가능
+        - Path 인터페이스의 구현 객체는 파일 시스템에서 경로를 의미
+        - java.nio.file 패키지에 포함
+        - 주요 메서드
+          |메서드|설명|
+          |-|-|
+          |Path getFileName()|객체가 가리키는 파일(폴더) 이름 반환|
+          |FileSystem getFileSystem()|객체를 생성한 파일 시스템 반환|
+          |int getNameCount()|객체가 가리키는 경로의 구성 요소 개수 반환|
+          |Path getParent()|부모 경로를 반환하며, 없으면 null 반환|
+          |Path getRoot()|루트를 반환하며, 없으면 null 반환|
+          |boolean isAbsolute()|절대 경로 여부 반환|
+          |Path isAbsolutePath()|절대 경로를 나타내는 객체 반환|
+          |URI toUri()|객체가 가리키는 경로에서 URI 반환|
+      - Paths 클래스
+        - 정적 메서드
+          ```
+          Path get(String first, String... more);
+          ```
+      - Files 클래스
+        - 파일 연산을 수행하는 정적 메서드로 구성된 클래스
+        - java.nio.file 패키지에 포함
+        - 주요 메서드
+          |메서드|설명|
+          |-|-|
+          |long copy()|파일을 복사한 후 복사된 바이트 개수 반환|
+          |Path copy()|파일을 복사한 후 복사된 경로 반환|
+          |Path createDirectory()|폴더 생성|
+          |Path createFile()|파일 생성|
+          |void delete()|파일 삭제|
+          |boolean deleteIfExists()|파일이 있으면 삭제|
+          |boolean exists()|파일의 존재 유무 조사|
+          |boolean isDirectory()|폴더인지 조사|
+          |boolean isExecutable()|실행 가능한 파일인지 조사|
+          |boolean isHidden()|숨김 파일인지 조사|
+          |boolean isReadable()|읽기 가능한 파일인지 조사|
+          |boolean isWritable()|쓰기 가능한 파일인지 조사|
+          |Path move()|파일 이동|
+          |boolean notExists()|파일(폴더)의 부재 조사|
+          |byte[] readAllBytes()|파일의 모든 바이트를 읽어 배열로 반환|
+          |List(String) readAllLines()|파일의 모든 행을 읽어 리스트로 반환|
+          |long size()|파일의 크기 반환|
+          |Path write()|파일에 데이터를 씀|
+        - 주요 정적 메서드
+          - JDK 1.8부터 사용 가능하며 IOException을 던질 수 있음
+          - 입출력 스트림을 생성하기 위한 메서드
+            - InputStream newInputStream(Path path, OpenOption... options)
+            - OutputStream newOutputStream(Path path, OpenOption... options)
+            - BufferedReader newBufferedReader(Path path)
+            - BufferedReader newBufferedReader(Path path, Charset cs)
+            - BufferedWriter newBufferedWriter(Path path, OpenOption... options)
+            - BufferedWriter newBufferedWriter(Path path, Charset cs, OpenOption... options)
+          - 기타
+            - List<String> readAllLines(Path path)
+    - 스트림 얻기
+      - BufferedReader 클래스의 lines() 메서드를 이용하여 스트림을 생성
+      - Files 클래스의 정적 메서드를 사용해 파일이나 폴더의 내용을 행 단위로 읽을 수 있는 스트림 생성
+      - Files 클래스가 스트림을 반환하는 제공하는 정적 메서드
+        |메서드|설명|
+        |-|-|
+        |Stream(String) lines(Path path)|기본 문자집합을 이용해 파일의 모든 행을 스트림으로 반환|
+        |Stream(String) lines(Path path, Charset cs)|주어진 문자집합을 이용해 파일의 모든 행을 스트림으로 반환|
+        |Stream(Path) list(Path dir)|서브 폴더를 제외한 폴더에 들어 있는 모든 원소를 스트림으로 반환|
+        |Stream(Path) walk(Path start)|서브 폴더를 포함한 폴더에 들어 있는 모든 원소를 스트림으로 반환|
 
 ## 디버깅
 - 오류의 종류
