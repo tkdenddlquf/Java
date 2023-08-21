@@ -1106,5 +1106,100 @@
 ## 예외 처리
 - 의미
   - 오류가 발생할 경우 프로그래머가 작성한 부분이 실행되도록 try~catch로 준비하는 것
+- 오류
+  - 구문 오류 발생 시 콘솔 창에 오류 내용이 출력된다
+  - 오류가 발생하면 오류의 원인과 행 번호가 표시되며, 클릭하면 오류가 발생한 행으로 커서 이동
+- 형식
+  ```
+  try
+  {
+    // 실행문
+  } catch (예외타입 e) {
+    // e : 오류 내용
+    // 예외 발생시 실행문
+  } finally {
+    // 마지막에 반드시 실행
+  }
+  ```
+  - try 구문 안에서 오류가 발생하고 그 오류가 예외타입 오류에 해당한다면 catch 구문 내부를 수행
+  - catch 구문을 여러번 사용하여 예외타입을 여러개 지정 가능
+  - finally 구문은 오류 발생 여부와 관계없이 실행
+  - e.getMessage( ) 메소드로 오류 내용을 추출해서 출력 가능
+- 종류
+  - 예외 타입은 클래스로서 서로 상속 관계
+    > 예외타입을 부모로 설정한 경우 자식 모두가 예외타입에 해당한다 
+  - Exception
+    - ClassNotFoundException
+    - IllegalAccessException
+    - RunTimeException
+      - ArithmeticException
+      - NullPointerException
+      - IndexOutOfBoundsException
+        - ArrayIndexOutOfBoundsException
+        - StringIndexOutOfBoundsException
+  - IOException
+    - EOFException
+    - FileNotFoundException
+- 오류 메시지 직접 만들기
+  ```java
+  throw new Exception("오류 메시지");
+  // 예외타입을 Exception으로 설정후 에러 발생시 "오류 메시지" 문장 출력
+  ```
+
+## 파일 입출력
+- 의미
+  - 파일 입출력 메소드는 입력과 출력을 표준 입출력 장치가 아닌 파일로 처리하는 메소드
+- 스트림(stream)
+    - 스트림은 데이터를 송수신하기 위한 통로의 개념
+    - 입력 혹은 출력, 한쪽 방향으로만 진행
+    - 스트림은 1바이트를 처리하는 바이트 스트림과 2바이트를 처리하는 문자 스트림으로 나뉜다
+      |바이트 스트림|문자 스트림|
+      |-|-|
+      |FileInputStream, FileOutputStream|BufferedReader, BufferedWriter, FileReader, FileWriter|
+    - 한글은 2바이트이므로 문자 스트림을 사용하는 것이 더 편리
+- 기본 과정
+  - 파일 열기 → 파일 쓰기 또는 읽기 → 파일 닫기
+  - 파일 열기
+    ```
+    FileInputStream 변수명 = new FileInputStream("파일명"); // 1바이트 읽기
+    BufferedReader 변수명2 = new BufferedReader(변수명); // 행 단위 읽기
+    ```
+    ```
+    FileOutputStream 변수명 = new FileOutputStream("파일명"); // 1바이트 쓰기
+    BufferedWriter 변수명2 = new BufferedWriter(변수명); // 행 단위 쓰기
+    ```
+  - 파일 처리
+    - 데이터를 쓰거나 파일로부터 데이터를 읽어올 수 있는 상태
+  - 파일 닫기
+    ```
+    변수명.close();
+    ```
+  - 주의 사항
+    - 파일을 읽을 때 발생될 예외 처리를 위해 throws Exception 문을 반드시 추가
+    - 파일 경로 또한 문자열이므로 폴더를 구분하기 위해 /를 사용한다면 하나만 넣어도 되지만 \를 사용하려면 \\와 같이 2개를 넣어야 함
+- 입력
+  - 1바이트씩 읽기
+    - 변수명.read( ) 메소드를 이용하여 1바이트씩 읽기 가능
+    - 파일의 끝인 경우 read( ) 메소드에서 -1반환
+    - 한글의 경우 2바이트를 차지하기 때문에 깨짐
+  - 행 단위로 읽기
+    - 변수명.readLine() 메소드를 이용하여 행 단위로 읽기 가능
+    - 파일의 끝인 경우 null 반환(문자열)
+  - Scanner를 이용한 입력
+    ```java
+    Scanner sc = new Scanner(new File("파일명"));
+    ```
+- 출력
+  - 1바이트씩 쓰기
+    - 변수명.write( ) 메소드를 이용하여 1바이트씩 쓰기 가능
+    - 출력의 경우 한글이 깨지지 않음
+  - FileWriter를 이용한 출력
+    ```java
+    // 한줄씩 쓰기 가능
+    FileWriter fw = new FileWriter("파일명");
+    fw.write("문자열");
+    fw.close();
+    ```
+
 
 
