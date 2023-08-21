@@ -131,7 +131,7 @@
     byte b = (byte)300; // int의 300을 byte로 강제 타입 변환시 데이터 손실 발생
     byte x = (byte)3.14; // double의 3.14를 byte로 강제 타입 변환시 데이터 손실되어 3만 대입
     ```
-## 기본 입출력
+## 입출력
 - 화면에 데이터 출력
   - println() : () 내부의 내용을 출력한 후 행을 바꾼다
   - print() : () 내부의 내용을 출력만 하고 행은 바꾸지 않는다
@@ -193,6 +193,58 @@
     |nextFloat()|float|
     |nextDouble()|double|
     |nextLine()|String|
+- 파일 입출력
+  - 스트림(stream)
+    - 스트림은 데이터를 송수신하기 위한 통로의 개념
+    - 입력 혹은 출력, 한쪽 방향으로만 진행
+    - 스트림은 1바이트를 처리하는 바이트 스트림과 2바이트를 처리하는 문자 스트림으로 나뉜다
+      |바이트 스트림|문자 스트림|
+      |-|-|
+      |FileInputStream, FileOutputStream|BufferedReader, BufferedWriter, FileReader, FileWriter|
+    - 한글은 2바이트이므로 문자 스트림을 사용하는 것이 더 편리
+  - 기본 과정
+    - 파일 열기 → 파일 쓰기 또는 읽기 → 파일 닫기
+    - 파일 열기
+      ```
+      FileInputStream 변수명 = new FileInputStream("파일명"); // 1바이트 읽기
+      BufferedReader 변수명2 = new BufferedReader(변수명); // 행 단위 읽기
+      ```
+      ```
+      FileOutputStream 변수명 = new FileOutputStream("파일명"); // 1바이트 쓰기
+      BufferedWriter 변수명2 = new BufferedWriter(변수명); // 행 단위 쓰기
+      ```
+    - 파일 처리
+      - 데이터를 쓰거나 파일로부터 데이터를 읽어올 수 있는 상태
+    - 파일 닫기
+      ```
+      변수명.close();
+      ```
+  - 주의 사항
+    - 파일을 읽을 때 발생될 예외 처리를 위해 throws Exception 문을 반드시 추가
+    - 파일 경로 또한 문자열이므로 폴더를 구분하기 위해 /를 사용한다면 하나만 넣어도 되지만 \를 사용하려면 \\와 같이 2개를 넣어야 함
+  - 입력
+    - 1바이트씩 읽기
+      - 변수명.read( ) 메소드를 이용하여 1바이트씩 읽기 가능
+      - 파일의 끝인 경우 read( ) 메소드에서 -1반환
+      - 한글의 경우 2바이트를 차지하기 때문에 깨짐
+    - 행 단위로 읽기
+      - 변수명.readLine() 메소드를 이용하여 행 단위로 읽기 가능
+      - 파일의 끝인 경우 null 반환(문자열)
+    - Scanner를 이용한 입력
+      ```java
+      Scanner sc = new Scanner(new File("파일명"));
+      ```
+  - 출력
+    - 1바이트씩 쓰기
+      - 변수명.write( ) 메소드를 이용하여 1바이트씩 쓰기 가능
+      - 출력의 경우 한글이 깨지지 않음
+    - FileWriter를 이용한 출력
+      ```java
+      // 한줄씩 쓰기 가능
+      FileWriter fw = new FileWriter("파일명");
+      fw.write("문자열");
+      fw.close();
+      ```
 
 ## 연산자
 - x + y 에서 x, y는 피연산자 +는 연산자를 의미
@@ -1147,59 +1199,5 @@
   ```
 
 ## 파일 입출력
-- 의미
-  - 파일 입출력 메소드는 입력과 출력을 표준 입출력 장치가 아닌 파일로 처리하는 메소드
-- 스트림(stream)
-    - 스트림은 데이터를 송수신하기 위한 통로의 개념
-    - 입력 혹은 출력, 한쪽 방향으로만 진행
-    - 스트림은 1바이트를 처리하는 바이트 스트림과 2바이트를 처리하는 문자 스트림으로 나뉜다
-      |바이트 스트림|문자 스트림|
-      |-|-|
-      |FileInputStream, FileOutputStream|BufferedReader, BufferedWriter, FileReader, FileWriter|
-    - 한글은 2바이트이므로 문자 스트림을 사용하는 것이 더 편리
-- 기본 과정
-  - 파일 열기 → 파일 쓰기 또는 읽기 → 파일 닫기
-  - 파일 열기
-    ```
-    FileInputStream 변수명 = new FileInputStream("파일명"); // 1바이트 읽기
-    BufferedReader 변수명2 = new BufferedReader(변수명); // 행 단위 읽기
-    ```
-    ```
-    FileOutputStream 변수명 = new FileOutputStream("파일명"); // 1바이트 쓰기
-    BufferedWriter 변수명2 = new BufferedWriter(변수명); // 행 단위 쓰기
-    ```
-  - 파일 처리
-    - 데이터를 쓰거나 파일로부터 데이터를 읽어올 수 있는 상태
-  - 파일 닫기
-    ```
-    변수명.close();
-    ```
-  - 주의 사항
-    - 파일을 읽을 때 발생될 예외 처리를 위해 throws Exception 문을 반드시 추가
-    - 파일 경로 또한 문자열이므로 폴더를 구분하기 위해 /를 사용한다면 하나만 넣어도 되지만 \를 사용하려면 \\와 같이 2개를 넣어야 함
-- 입력
-  - 1바이트씩 읽기
-    - 변수명.read( ) 메소드를 이용하여 1바이트씩 읽기 가능
-    - 파일의 끝인 경우 read( ) 메소드에서 -1반환
-    - 한글의 경우 2바이트를 차지하기 때문에 깨짐
-  - 행 단위로 읽기
-    - 변수명.readLine() 메소드를 이용하여 행 단위로 읽기 가능
-    - 파일의 끝인 경우 null 반환(문자열)
-  - Scanner를 이용한 입력
-    ```java
-    Scanner sc = new Scanner(new File("파일명"));
-    ```
-- 출력
-  - 1바이트씩 쓰기
-    - 변수명.write( ) 메소드를 이용하여 1바이트씩 쓰기 가능
-    - 출력의 경우 한글이 깨지지 않음
-  - FileWriter를 이용한 출력
-    ```java
-    // 한줄씩 쓰기 가능
-    FileWriter fw = new FileWriter("파일명");
-    fw.write("문자열");
-    fw.close();
-    ```
-
 
 
