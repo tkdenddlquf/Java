@@ -922,6 +922,21 @@
         |-|-|
         |InputStream|FileInputStream, PipedInputStream, FilterInputStream, ByteArrayInputStream, SequenceInputStream, StringBufferInputStream, ObjectInputStream, BufferedInputStream, DataInputStream, LintNumberInputStream, PushbackInputStream|
         |OutputStream|FileOutputStream, PipedOutputStream, FilterOutputStream, ByteArrayOutputStream, ObjectOutputStream, BufferedOutputStream, DataOutputStream, PrintStream|
+        - FileInputStream및 FileOutputStream
+          - 시스템에 있는 모든 파일을 읽거나 쓸 수 있는 기능 제공
+          - 생성자로 스트림 객체를 생성할 때는 FileNotFoundException 예외 가능성이 있기 때문에 반드시 예외 처리 필요
+        - BufferedInputStream및 BufferedOutputStream
+          - 버퍼는 스트림과 프로그램 간에 데이터를 효율적으로 전송하려고 사용하는 메모리
+          - 입출력 장치와 프로그램 간 동작 속도가 크게 차이가 날 때 버퍼를 사용하면 매우 효율적
+        - DataInputStream및 DataOutputStream
+          - 각각 기초 타입 데이터를 읽는 메서드와 기초 타입 데이터를 기록하는 메서드를 사용할 수 있는 스트림
+          - 직접 키보드에서 데이터를 입력받거나 콘솔 뷰에 데이터를 출력하기에는 부적합
+          - FileInputStream및 FileOutputStream등 다른 스트림과 연결해서 파이프라인을 구성해 사용
+        - PrintStream
+          - 다양한 데이터 값을 편리하게 표현할 수 있도록 출력 스트림에 기능을 추가한 스트림
+          - IOException을 발생하지 않음
+          - 자동 플러시 기능을 제공해 flush( ) 메서드를 호출하지 않고도 버퍼를 비울 수 있음
+          - System.out객체의 println( ), print( ), printf( ) 메서드는 PrintStream으로 출력
         - 주요 메서드
           - InputStream
             |메서드|설명|
