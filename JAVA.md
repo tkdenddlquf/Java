@@ -1686,8 +1686,8 @@
     menu.add(item); // 메뉴에 메뉴 항목 추가
     frame.setJMenuBar(mb); // 프레임에 메뉴바 부착
     ```
-
-## 실습 파일
+    
+# 실습 파일 및 과제 파일
 <details>
 <summary>기본 데이터(C:\Temp\menu.txt)</summary>
   
@@ -1700,6 +1700,8 @@
 5 된장 3000 5
 ```
 </details>
+
+## 실습 파일
 <details>
 <summary>Scanner를 이용한 기본 자판기</summary>
   
@@ -4256,7 +4258,7 @@ public class test
 ```
 </details>
 
-## 테스트
+## 과제
 <details>
 <summary>구구단 출력</summary>
   
