@@ -1688,6 +1688,2605 @@
     ```
 
 ## 실습 파일
+<details>
+<summary>Scanner를 이용한 기본 자판기</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in); 
+
+		System.out.println("=====================");
+		System.out.println("      자판기");
+		System.out.println("=====================");
+		System.out.println("1. 커피      100원");
+		System.out.println("2. 우유      200원");
+		System.out.println("3. 콜라      200원");
+		System.out.println("=====================");
+		System.out.println("돈을 입력하세요...");
+		
+		int money = in.nextInt();
+		System.out.printf("입력한 돈은 %d 원 입니다.", money);
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 메뉴선택 if문 활용</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test 
+{
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in); 
+		
+		int MENU_1_PRICE = 1500;
+		int MENU_2_PRICE = 2000;
+		int MENU_3_PRICE = 3000;
+				
+		System.out.println("=====================");
+		System.out.println("      자판기");
+		System.out.println("=====================");		
+		System.out.println("돈을 입력하세요...");
+		
+		int money = in.nextInt();
+		System.out.printf("입력한 돈은 %d 원 입니다.\n", money);
+		
+		if(money<MENU_1_PRICE)
+		{
+			System.out.println("돈이 부족합니다.\n");
+		}
+		else
+		{
+			System.out.println("=====================");		
+			System.out.printf("1. 커피      %d원\n",MENU_1_PRICE);
+			System.out.printf("2. 우유      %d원\n",MENU_2_PRICE);
+			System.out.printf("3. 콜라      %d원\n",MENU_3_PRICE);
+			System.out.println("=====================");
+			System.out.println("메뉴를 선택해주세요.\n");
+
+			int menu = in.nextInt();
+			if(menu==1)
+			{
+				if(money >= MENU_1_PRICE)
+				{
+					money -= MENU_1_PRICE; // money = money - 100
+					System.out.printf("커피를 고르셨습니다..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+				else
+				{
+					System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+			}
+			else if(menu==2)
+			{
+				if(money >= MENU_2_PRICE)
+				{
+					money -= MENU_2_PRICE; 
+					System.out.printf("우유를 고르셨습니다..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+				else
+				{
+					System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+			}
+			else if(menu==3)
+			{
+				if(money >= MENU_2_PRICE)
+				{
+					money -= MENU_3_PRICE; 
+					System.out.printf("콜라를 고르셨습니다..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+				else
+				{
+					System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+			}
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 메뉴선택 switch문 활용</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in); 
+		
+		int MENU_1_PRICE = 1500;
+		int MENU_2_PRICE = 2000;
+		int MENU_3_PRICE = 3000;
+				
+		System.out.println("=====================");
+		System.out.println("      자판기");
+		System.out.println("=====================");		
+		System.out.println("돈을 입력하세요...");
+		
+		int money = in.nextInt();
+		System.out.printf("입력한 돈은 %d 원 입니다.\n", money);
+		
+		if(money<MENU_1_PRICE)
+		{
+			System.out.println("돈이 부족합니다.\n");
+		}
+		else
+		{
+			System.out.println("=====================");		
+			System.out.printf("1. 커피      %d원\n",MENU_1_PRICE);
+			System.out.printf("2. 우유      %d원\n",MENU_2_PRICE);
+			System.out.printf("3. 콜라      %d원\n",MENU_3_PRICE);
+			System.out.println("=====================");
+			System.out.println("메뉴를 선택해주세요.\n");
+
+			int menu = in.nextInt();
+			
+			switch(menu)	//			if(menu==1)
+			{
+			case 1:
+				if(money >= MENU_1_PRICE)
+				{
+					money -= MENU_1_PRICE; // money = money - 100
+					System.out.printf("커피를 고르셨습니다..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+				else
+				{
+					System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}				
+				break;
+			case 2:
+				if(money >= MENU_2_PRICE)
+				{
+					money -= MENU_2_PRICE; 
+					System.out.printf("우유를 고르셨습니다..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+				else
+				{
+					System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}				
+				break;
+			case 3:
+				if(money >= MENU_2_PRICE)
+				{
+					money -= MENU_3_PRICE; 
+					System.out.printf("콜라를 고르셨습니다..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}
+				else
+				{
+					System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+					System.out.printf("잔돈은 %d원 입니다.\n", money);
+				}				
+				break;
+			default:
+				break;
+			}
+		}		
+	}
+}
+```
+</details>
+<details>
+<summary>월별 말일 출력</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		Scanner in = new Scanner(System.in);
+		
+		System.out.print("월을 입력하세요..>>");
+		int month = in.nextInt();
+
+		switch(month)
+		{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			System.out.printf("%d월은 31일입니다.", month);
+			break;
+
+		case 2:
+			System.out.println("2월은 28일입니다.");
+			break;
+
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			System.out.printf("%d월은 30일입니다.", month);
+			break;
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>구구단 가로출력</summary>
+  
+```java
+package com.practice;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		int i, j;
+
+		for(i=2;i<=9;i++)
+		{
+			System.out.printf("%d단\t", i);
+		}
+    
+		System.out.printf("\n");
+
+		for(i=2;i<=9;i++)
+		{
+			System.out.printf("======\t");
+		}
+    
+		System.out.printf("\n");
+		
+		for(j=1;j<=9;j++)
+		{
+			for(i=2;i<=9;i++)
+			{
+				System.out.printf("%d*%d=%2d\t", i, j, i*j);
+			}
+      
+			System.out.printf("\n");
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>단순 계산기</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		int i;
+		Scanner in = new Scanner(System.in);
+		int a, b, result;
+		double fresult;
+		char op;
+		boolean flag = true;
+		
+		while(flag)
+		{
+			System.out.print("a를 입력하세요..");
+			a=in.nextInt();
+			System.out.print("b를 입력하세요..");
+			b=in.nextInt();
+			System.out.print("연산자(+-*/)를 입력하세요..");
+			op=in.next().charAt(0);
+					
+			switch(op)
+			{
+			case '+':
+				result = a+b;
+				System.out.printf("결과는 %d\n", result);
+				break;
+          
+			case '-':
+				result = a-b;
+				System.out.printf("결과는 %d\n", result);
+				break;
+          
+			case '*':
+				result = a*b;
+				System.out.printf("결과는 %d\n", result);
+				break;
+          
+			case '/':
+				fresult = (double)a/(double)b;
+				System.out.printf("결과는 %f\n", fresult);
+				break;
+          
+			case 'q':
+				flag = false;
+				System.out.printf("종료\n");
+				break;
+			}
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 switch, if 문 활용</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in); 
+		
+		int MENU_1_PRICE = 1500;
+		int MENU_2_PRICE = 2000;
+		int MENU_3_PRICE = 3000;
+				
+		System.out.println("=====================");
+		System.out.println("      자판기");
+		System.out.println("=====================");		
+		
+		boolean moneyflag = true;
+		int money=0;
+		
+		while(moneyflag)
+		{
+			System.out.println("돈을 입력하세요...");
+			money = money + in.nextInt();
+			System.out.printf("입력한 돈은 %d 원 입니다.\n", money);
+      
+			if(money<MENU_1_PRICE)
+			{
+				System.out.println("돈이 부족합니다.\n");
+				System.out.println("더 입력하시겠습니까? (Y or N)\n");
+				char val = in.next().charAt(0);
+        
+				switch(val)
+				{
+				case 'N':
+				case 'n':
+					moneyflag = false;
+					break;
+            
+				case 'Y':
+				case 'y':
+					break;
+				}
+			}
+			else
+			{
+				moneyflag = false;
+			}
+		}
+		
+		if(money<MENU_1_PRICE)
+		{
+			System.out.println("돈이 부족합니다.\n");
+		}
+		else
+		{
+			System.out.println("=====================");		
+			System.out.printf("1. 커피      %d원\n",MENU_1_PRICE);
+			System.out.printf("2. 우유      %d원\n",MENU_2_PRICE);
+			System.out.printf("3. 콜라      %d원\n",MENU_3_PRICE);
+			System.out.println("=====================");
+
+			int menu;
+      
+			do
+			{
+				System.out.println("메뉴를 선택해주세요.\n");
+				menu = in.nextInt();
+        
+				if(menu==1)
+				{
+					if(money >= MENU_1_PRICE)
+					{
+						money -= MENU_1_PRICE; // money = money - 100
+						System.out.printf("커피를 고르셨습니다..\n");
+						System.out.printf("잔돈은 %d원 입니다.\n", money);
+					}
+					else
+					{
+						System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+						System.out.printf("잔돈은 %d원 입니다.\n", money);
+					}
+				}
+				else if(menu==2)
+				{
+					if(money >= MENU_2_PRICE)
+					{
+						money -= MENU_2_PRICE; 
+						System.out.printf("우유를 고르셨습니다..\n");
+						System.out.printf("잔돈은 %d원 입니다.\n", money);
+					}
+					else
+					{
+						System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+						System.out.printf("잔돈은 %d원 입니다.\n", money);
+					}
+				}
+				else if(menu==3)
+				{
+					if(money >= MENU_3_PRICE)
+					{
+						money -= MENU_3_PRICE; 
+						System.out.printf("콜라를 고르셨습니다..\n");
+						System.out.printf("잔돈은 %d원 입니다.\n", money);
+					}
+					else
+					{
+						System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+						System.out.printf("잔돈은 %d원 입니다.\n", money);
+					}
+				}
+				else
+				{
+					menu = -1;
+					System.out.printf("메뉴를 잘 못 고르셨습니다.\n");
+				}
+			}
+        while(menu == -1);
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>성적표 1차원</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args)
+ {
+		Scanner in = new Scanner(System.in); 
+		int[] score = new int[4];
+		int total = 0;
+		double average;
+		int i;
+		String[] title = new String[] {"국어", "영어", "수학", "과학"};
+		
+		for(i=0;i<4;i++)
+		{
+			System.out.println(title[i] + "점수를 입력하세요");
+			score[i] = in.nextInt();
+			total = total + score[i];
+		}
+
+		average = (double)total/4.0;
+	
+		System.out.println(total);
+		System.out.println(average);
+	}
+}
+```
+</details>
+<details>
+<summary>성적표 2차원</summary>
+  
+```java
+package com.practice;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		int[][] score = {
+					{100,90,80,70},
+					{100,95,80,75},
+					{100,90,85,60}
+				};
+		int[] total = new int[3];
+		double[] average = new double[3];
+		String[] name = {"JeaWon","JeaTwo","JeaThree"};
+		int i, j;
+    
+		for(i=0;i<3;i++)
+		{
+			total[i]=0;
+			for(j=0;j<4;j++)
+			{
+				total[i] += score[i][j];
+			}
+			average[i] = (double)total[i]/4.0;
+		}
+		
+		System.out.printf("이름\t국어\t영어\t수학\t과학\t총점\t평균\n");
+		System.out.printf("========================================\n");
+		for(i=0;i<3;i++)
+		{
+			System.out.printf("%s\t",name[i]);
+			for(j=0;j<4;j++)
+			{
+				System.out.printf("%d\t",score[i][j]);
+			}
+			System.out.printf("%d\t",total[i]);
+			System.out.printf("%f\n",average[i]);
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 잔돈처리</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test 
+{
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in); 
+		
+		int MENU_1_PRICE = 1500;
+		int MENU_2_PRICE = 2000;
+		int MENU_3_PRICE = 3000;
+				
+		System.out.println("=====================");
+		System.out.println("      자판기");
+		System.out.println("=====================");		
+		
+		boolean moneyflag = true;
+		int money=0;
+		
+		while(moneyflag)
+		{
+			System.out.println("돈을 입력하세요...");
+			money = money + in.nextInt();
+			System.out.printf("입력한 돈은 %d 원 입니다.\n", money);
+      
+			if(money<MENU_1_PRICE)
+			{
+				System.out.println("돈이 부족합니다.\n");
+				System.out.println("더 입력하시겠습니까? (Y or N)\n");
+				char val = in.next().charAt(0);
+				switch(val)
+				{
+				case 'N':
+				case 'n':
+					moneyflag = false;
+					break;
+            
+				case 'Y':
+				case 'y':
+					break;
+				}
+			}
+			else
+			{
+				moneyflag = false;
+			}
+		}
+    
+		boolean menuflag = true;
+    
+		while(menuflag)
+		{
+			if(money<MENU_1_PRICE)
+			{
+				System.out.println("돈이 부족합니다.\n");
+				break;
+				//menuflag = false;
+			}
+			else
+			{
+				System.out.println("=====================");		
+				System.out.printf("1. 커피      %d원\n",MENU_1_PRICE);
+				System.out.printf("2. 우유      %d원\n",MENU_2_PRICE);
+				System.out.printf("3. 콜라      %d원\n",MENU_3_PRICE);
+				System.out.printf("0. 잔돈반환  \n");
+				System.out.println("=====================");
+
+				int menu;
+        
+				do
+				{
+					System.out.println("메뉴를 선택해주세요.\n");
+					menu = in.nextInt();
+					if(menu==1)
+					{
+						if(money >= MENU_1_PRICE)
+						{
+							money -= MENU_1_PRICE; // money = money - 100
+							System.out.printf("커피를 고르셨습니다..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+						else
+						{
+							System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+					}
+					else if(menu==2)
+					{
+						if(money >= MENU_2_PRICE)
+						{
+							money -= MENU_2_PRICE; 
+							System.out.printf("우유를 고르셨습니다..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+						else
+						{
+							System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+					}
+					else if(menu==3)
+					{
+						if(money >= MENU_3_PRICE)
+						{
+							money -= MENU_3_PRICE; 
+							System.out.printf("콜라를 고르셨습니다..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+						else
+						{
+							System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+					}
+					else if(menu==0)
+					{
+						menuflag = false;
+					}
+					else
+					{
+						menu = -1;
+						System.out.printf("메뉴를 잘 못 고르셨습니다.\n");
+					}
+          
+					if(money>=MENU_1_PRICE)
+					{
+						System.out.println("더 구입하시겠습니까? (Y or N)\n");
+						char val = in.next().charAt(0);
+						switch(val)
+						{
+						case 'N':
+						case 'n':
+							menuflag = false;
+							break;
+                
+						case 'Y':
+						case 'y':
+							break;
+						}
+					}
+					else
+					{
+						menuflag = false;
+					}	
+				}while(menu == -1);
+			}
+		}
+		System.out.printf("잔돈은 %d원 입니다.\n", money);
+		System.out.printf("안녕히 가세요.\n");
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 배열 사용 1</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test 
+{
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in); 
+		
+    //int MENU_1_PRICE = 1500;
+    //int MENU_2_PRICE = 2000;
+    //int MENU_3_PRICE = 3000;
+		
+		int[] menu_price = {1000, 2000, 3000};
+		String[] menu_title = {"아메리카노","카페라떼","콜라"};
+		int i;
+		
+		System.out.println("=====================");
+		System.out.println("      자판기");
+		System.out.println("=====================");		
+		
+		boolean moneyflag = true;
+		int money=0;
+		
+		while(moneyflag)
+		{
+			System.out.println("돈을 입력하세요...");
+			money = money + in.nextInt();
+			System.out.printf("입력한 돈은 %d 원 입니다.\n", money);
+      
+			if(money<MENU_1_PRICE)
+			{
+				System.out.println("돈이 부족합니다.\n");
+				System.out.println("더 입력하시겠습니까? (Y or N)\n");
+				char val = in.next().charAt(0);
+        
+				switch(val)
+				{
+				case 'N':
+				case 'n':
+					moneyflag = false;
+					break;
+            
+				case 'Y':
+				case 'y':
+					break;
+				}
+			}
+			else
+			{
+				moneyflag = false;
+			}
+		}
+    
+		boolean menuflag = true;
+		
+		while(menuflag)
+		{
+			if(money<MENU_1_PRICE)
+			{
+				System.out.println("돈이 부족합니다.\n");
+				break;
+				//menuflag = false;
+			}
+			else
+			{
+				System.out.println("=====================");
+        
+				for(i=0;i<menu_title.length;i++)
+				{
+					System.out.printf("%d %s   %d원\n",i+1, menu_title[i], menu_price[i]);
+				}
+        
+				System.out.printf("%d. 잔돈반환  \n", i);
+				System.out.println("=====================");
+
+				int menu;
+        
+				do
+				{
+					System.out.println("메뉴를 선택해주세요.\n");
+					menu = in.nextInt();
+          
+					if(menu==1)
+					{
+						if(money >= MENU_1_PRICE)
+						{
+							money -= MENU_1_PRICE; // money = money - 100
+							System.out.printf("커피를 고르셨습니다..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+						else
+						{
+							System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+					}
+					else if(menu==2)
+					{
+						if(money >= MENU_2_PRICE)
+						{
+							money -= MENU_2_PRICE; 
+							System.out.printf("우유를 고르셨습니다..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+						else
+						{
+							System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+					}
+					else if(menu==3)
+					{
+						if(money >= MENU_3_PRICE)
+						{
+							money -= MENU_3_PRICE; 
+							System.out.printf("콜라를 고르셨습니다..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+						else
+						{
+							System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+					}
+					else if(menu==0)
+					{
+						menuflag = false;
+					}
+					else
+					{
+						menu = -1;
+						System.out.printf("메뉴를 잘 못 고르셨습니다.\n");
+					}
+					
+					if(money>=MENU_1_PRICE)
+					{
+						System.out.println("더 구입하시겠습니까? (Y or N)\n");
+						char val = in.next().charAt(0);
+            
+						switch(val)
+						{
+						case 'N':
+						case 'n':
+							menuflag = false;
+							break;
+                
+						case 'Y':
+						case 'y':
+							break;
+						}
+					}
+					else
+					{
+						menuflag = false;
+					}
+				} while(menu == -1);
+			}
+		}
+		System.out.printf("잔돈은 %d원 입니다.\n", money);
+		System.out.printf("안녕히 가세요.\n");
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 배열 사용 2</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in);
+		String[] menu_title = {"아메리카노","카페라떼","콜라"};
+		int[] menu_price = {1000, 2000, 3000};
+		int i;
+	
+		System.out.println("=====================");
+		System.out.println("      자판기");
+		System.out.println("=====================");		
+		
+		boolean moneyflag = true;
+		int money=0;
+		
+		while(moneyflag)
+		{
+			System.out.println("돈을 입력하세요...");
+			money = money + in.nextInt();
+			System.out.printf("입력한 돈은 %d 원 입니다.\n", money);
+      
+			if(money<menu_price[0])
+			{
+				System.out.println("돈이 부족합니다.\n");
+				System.out.println("더 입력하시겠습니까? (Y or N)\n");
+				char val = in.next().charAt(0);
+        
+				switch(val)
+				{
+				case 'N':
+				case 'n':
+					moneyflag = false;
+					break;
+            
+				case 'Y':
+				case 'y':
+					break;
+				}
+			}
+			else
+			{
+				moneyflag = false;
+			}
+		}
+		
+		boolean menuflag = true;
+		
+		while(menuflag)
+		{
+			if(money<menu_price[0])
+			{
+				System.out.println("돈이 부족합니다.\n");
+				//break;
+				menuflag = false;
+			}
+			else
+			{
+				System.out.println("=====================");		
+        
+				for(i=0;i<menu_title.length;i++)
+				{
+					System.out.printf("%d %s   %d원\n",i+1, menu_title[i], menu_price[i]);
+				}
+				System.out.printf("%d. 잔돈반환  \n", i+1);
+				System.out.println("=====================");
+
+				int menu;
+        
+				do
+				{
+					System.out.println("메뉴를 선택해주세요.\n");
+					
+					menu = in.nextInt();
+					
+					if(menu <= menu_title.length)
+					{
+						if(money >= menu_price[menu-1])
+						{
+							money -= menu_price[menu-1]; // money = money - 100
+							System.out.printf("%s를 고르셨습니다..\n", menu_title[menu-1]);
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+						else
+						{
+							System.out.printf("어허 돈이 부족해서 그건 못 뽑는다네..\n");
+							System.out.printf("잔돈은 %d원 입니다.\n", money);
+						}
+					}
+					else
+					{
+						if(menu==menu_title.length+1)
+						{
+							menuflag = false;
+						}
+						else
+						{
+							menu = -1;
+							System.out.printf("메뉴를 잘 못 고르셨습니다.\n");
+						}
+					}
+				} while(menu == -1);
+        
+				if(money>=menu_price[0])
+				{
+					System.out.println("더 구입하시겠습니까? (Y or N)\n");
+					char val = in.next().charAt(0);
+					switch(val)
+					{
+					case 'N':
+					case 'n':
+						menuflag = false;
+						break;
+              
+					case 'Y':
+					case 'y':
+						break;
+					}
+				}
+				else
+				{
+					menuflag = false;
+				}
+			}
+		}
+		System.out.printf("잔돈은 %d원 입니다.\n", money);
+		System.out.printf("안녕히 가세요.\n");
+	}
+}
+```
+</details>
+<details>
+<summary>for문 활용 점수 출력</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+
+	public static void main(String[] args)
+  {
+		Scanner in = new Scanner(System.in); 
+		
+		int numStudents;
+		System.out.print("학생수: ");
+		numStudents = in.nextInt();
+		int[] score = new int[numStudents];
+		int total = 0;
+		double average;
+		
+		for(int i=0; i<numStudents; i++)
+		{
+			System.out.printf("%d번 학생 점수: ", i);
+			score[i]=in.nextInt();
+			total += score[i]; 
+		}
+    
+		average = (double)total/(double)numStudents;
+		System.out.printf("총점수 %d  평균: %f\n", total, average);
+		
+		int maxScore = score[0];
+		int maxNo = 0;
+    
+		for(int i=1;i<numStudents;i++)
+		{
+			if(maxScore < score[i])
+			{
+				maxScore=score[i];
+				maxNo = i;
+			}
+		}
+    
+		System.out.printf("%d번  %d가 제일 높은 점수입니다.\n", maxNo,maxScore);
+	
+		int min;
+		int temp;
+		
+		for(int i=0;i<numStudents;i++)
+		{
+			min = i;
+			for(int j=i+1;j<numStudents;j++)
+			{
+				if(score[min] < score[j])
+				{
+					min = j;
+				}
+			}
+			temp = score[min];
+			score[min]=score[i];
+			score[i]=temp;
+		}
+		
+		for(int i=0;i<numStudents;i++)
+		{
+			System.out.printf("%d  ", score[i]);		
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>예외처리 기초</summary>
+  
+```java
+package com.practice;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		int[] aa = new int[2];
+		
+		try {
+			aa[0] = 10/0;
+		} 
+      
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			System.out.println("배열 범위를 확인하세요.");
+		}
+      
+		catch(ArithmeticException e)
+		{
+			System.out.println("0으로 나누지 마세요.");
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>표준 입력</summary>
+  
+```java
+package com.practice;
+
+import java.io.IOException;
+
+public class test
+{
+	public static void main(String[] args) throws IOException 
+  {
+		String userName = "abc";
+		String input="";
+		int key;
+		
+		while( (key = System.in.read()) != 13)
+		{
+			input = input + Character.toString(key);
+		}
+		
+		if(input.equals(userName))
+		{
+			System.out.println(input + "님 어서오세요");
+		}
+		else
+		{
+			System.out.println(input + "님은 등록이 안되어 있습니다.");
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>for문 활용 성적 sort</summary>
+  
+```java
+package com.practice;
+
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		Scanner in = new Scanner(System.in); 
+		
+		int numStudents;
+		System.out.print("학생수: ");
+		numStudents = in.nextInt();
+		
+		int[] score = new int[numStudents];
+		String[] name = new String[numStudents];
+		int[] num = new int[numStudents];
+		
+		int total = 0;
+		double average;
+		
+		for(int i=0; i<numStudents; i++)
+		{
+			System.out.printf("%d번 학생 이름: ", i);
+			name[i]=in.next() ;
+			System.out.printf("%d번 학생 점수: ", i);
+			score[i]=in.nextInt();
+			total += score[i];
+			num[i]=i+1;
+		}
+    
+		average = (double)total/(double)numStudents;
+		System.out.printf("총점수 %d  평균: %f\n", total, average);
+		
+		int maxScore = score[0];
+		int maxNo = 0;
+    
+		for(int i=1;i<numStudents;i++)
+		{
+			if(maxScore < score[i])
+			{
+				maxScore=score[i];
+				maxNo = i;
+			}
+		}
+		System.out.printf("%d번  %d가 제일 높은 점수입니다.\n", maxNo,maxScore);
+		
+	
+		int min;
+		int temp;
+		int tempn;
+		String temps;
+		
+		for(int i=0;i<numStudents;i++)
+		{
+			min = i;
+			for(int j=i+1;j<numStudents;j++)
+			{
+				if(score[min] < score[j])
+				{
+					min = j;
+				}
+			}
+			temp = score[min];
+			score[min]=score[i];
+			score[i]=temp;
+			
+			temps = name[min];
+			name[min]=name[i];
+			name[i]=temps;
+			
+			tempn = num[min];
+			num[min]=num[i];
+			num[i]=tempn;
+		}
+		
+		for(int i=0;i<numStudents;i++)
+		{
+			System.out.printf("%d  %s  %d\n",num[i], score[i], name[i], i+1);		
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>FileInputStream 1바이트씩 읽기</summary>
+  
+```java
+package com.practice;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+  {
+		FileInputStream fis = new FileInputStream("c:\\Temp\\data.txt");
+		int ch;
+		
+		while ( (ch = fis.read()) != -1  )
+		{
+			System.out.print( (char)ch );
+		}
+		
+		fis.close();
+	}
+}
+```
+</details>
+<details>
+<summary>FileInputStream String 변환</summary>
+  
+```java
+package com.practice;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+  {
+		FileInputStream fis = new FileInputStream("c:\\Temp\\data.txt");
+		
+		int ch;
+		byte[] bt = new byte[100];
+		int i=0;
+		
+		while ( (ch = fis.read()) != -1  )
+		{
+			bt[i] =  (byte)ch;
+			i++;
+		}
+    
+		System.out.println(new String(bt));
+		fis.close();
+	}
+}
+```
+</details>
+<details>
+<summary>readLine 기초</summary>
+  
+```java
+package com.practice;
+
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+  {
+		FileReader fReader = new FileReader("c:\\Temp\\data.txt");
+		BufferedReader bReader = new BufferedReader(fReader);
+		String str = "";
+
+		while ( (str=bReader.readLine()) != null)
+		{
+			System.out.println(str);
+		}
+
+		fReader.close();
+		bReader.close();
+	}
+}
+```
+</details>
+<details>
+<summary>파일 Scanner</summary>
+  
+```java
+package com.practice;
+
+import java.io.File;
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+{
+		Scanner in = new Scanner(new File("c:\\Temp\\data.txt"));
+		int sum=0;
+		
+		while(in.hasNext())
+		{
+			sum += in.nextInt();
+		}
+
+		System.out.println("합=" + sum);
+		in.close();
+	}
+}
+```
+</details>
+<details>
+<summary>FileWriter</summary>
+  
+```java
+package com.practice;
+
+import java.io.FileWriter;
+import java.util.Scanner;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+  {
+		Scanner in = new Scanner(System.in);
+		FileWriter fw = new FileWriter("c:\\Temp\\data1.txt");
+		String str;
+		
+		while( (str = in.nextLine()).equals("") == false )
+		{
+			fw.write(str + "\r\n");
+		}
+
+		fw.close();
+	}
+}
+```
+</details>
+<details>
+<summary>성적 파일 입출력</summary>
+  
+```java
+package com.practice;
+
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+  {
+		Scanner in = new Scanner(new File("c:\\Temp\\data.txt"));
+		FileWriter fw = new FileWriter("c:\\Temp\\data1.txt");
+		int numStudents;
+		numStudents = in.nextInt();
+		int[] num = new int[numStudents];
+		String[] name = new String[numStudents];
+		int[] score = new int[numStudents];
+		
+		for(int i=0; i<numStudents; i++)
+		{
+			num[i] = in.nextInt();
+			name[i] = in.next();
+			score[i] = in.nextInt();
+		}
+
+		String out="";
+
+		for(int i=0; i<numStudents; i++)
+		{
+			out = String.format("%d -- %s -- %d\r\n", num[i], name[i], score[i] );
+			fw.write(out);
+		}
+    
+		in.close();
+		fw.close();
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 메뉴 파일 확인</summary>
+  
+```java
+package com.practice;
+
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+  {
+		File file = new File("c:\\Temp\\menu.txt");
+		boolean isExists = file.exists();
+		int numItems;		
+		
+		if(isExists)
+		{
+			Scanner in = new Scanner(file);			
+			numItems = in.nextInt();
+			int[] menu_num = new int[numItems];
+			String[] menu_title = new String[numItems];
+			int[] menu_price = new int[numItems];
+
+			for(int i=0; i<numItems; i++)
+			{
+				menu_num[i] = in.nextInt();
+				menu_title[i] = in.next();
+				menu_price[i] = in.nextInt();
+			}
+      
+			in.close();
+			
+			// select menu
+      //for(int i=0; i<numItems; i++)
+      //{
+      //System.out.printf("%d  %s  %d\n", menu_num[i], menu_title[i], menu_price[i]);
+      //}
+		}
+		else // create menu
+		{
+			System.out.println("File Not Found");
+			FileWriter fw = new FileWriter("c:\\Temp\\data1.txt");
+			fw.close();
+		}
+	}
+}
+```
+</details>
+<details>
+<summary>클래스 기초</summary>
+  
+```java
+package com.practice;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		Car myCar1 = new Car("빨강");
+		Car myCar2 = new Car(30);
+		Car myCar3 = new Car("보라색", 100);
+		
+    //myCar1.setColor("빨강");
+		
+		myCar1.setSpeed(0);
+		myCar1.upSpeed(100);
+		System.out.printf("Car: %d\n", Car.getCount());
+	}
+}
+
+class Car
+{
+	private String color;
+	private int speed;
+	private static int count = 0;
+	
+	Car(String color)
+	{
+		this.color=color;
+		this.speed=0;
+		count++;
+	}
+  
+	Car(int speed)
+	{
+		this.color="흰색";
+		this.speed=speed;
+		count++;
+	}
+  
+	Car(String color, int speed)
+	{
+		this.color=color;
+		this.speed=speed;
+		count++;
+	}
+	
+	void upSpeed(int value)
+	{
+		speed += value;
+	}
+	
+	void downSpeed(int value)
+	{
+		speed -= value;
+	}
+
+	void setColor(String color){this.color = color;}
+	String getColor(){return color;}
+	
+	void setSpeed(int value) {speed = value;}		
+	int getSpeed() {return speed;}
+	
+	static int getCount() {return count;}
+}
+```
+</details>
+<details>
+<summary>GUI 기초</summary>
+  
+```java
+package com.practice;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		JFrame f = new JFrame("안녕안녕");
+		
+		//f.setTitle("안녕 나는 A야");
+		f.setSize(400, 300);
+		f.setLayout(new GridLayout(3,0));
+		
+		JPanel p1 = new JPanel();
+		JPanel p2 = new JPanel();
+		JPanel p3 = new JPanel();
+				
+		JButton bt1 = new JButton("버튼1");
+		p1.add(bt1);
+	
+		JButton bt2 = new JButton("버튼2");
+		p1.add(bt2);
+
+		JButton bt3 = new JButton("버튼2");
+		bt3.setEnabled(false);
+		bt3.setText("버튼3");
+		p2.add(bt3);
+		
+		JLabel lb1 = new JLabel("안녕");
+		p2.add(lb1);
+		
+		JTextField txtf1 = new JTextField(10); 
+		p3.add(txtf1);
+		
+		f.add(p1);
+		f.add(p2);
+		f.add(p3);
+		f.setVisible(true);
+    
+		System.out.print(txtf1.getText());
+	}
+}
+```
+</details>
+<details>
+<summary>원 넓이 구하기</summary>
+  
+```java
+package com.practice;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		JFrame f = new JFrame("원 넓이 구하기");
+		
+		f.setLayout(new BorderLayout());
+		f.setSize(300, 300);
+		
+		//north
+		JPanel nPanel = new JPanel(new GridLayout(2,0));
+		JPanel np1 = new JPanel();
+		JPanel np2 = new JPanel();
+		
+		JLabel l1 = new JLabel("원의 반지름");
+		JTextField t1 = new JTextField(10);
+		
+		JLabel l2 = new JLabel("원의 넓이");
+		JTextField t2 = new JTextField(10);
+		
+		np1.add(l1);
+		np1.add(t1);
+		np2.add(l2);
+		np2.add(t2);
+		
+		nPanel.add(np1);
+		nPanel.add(np2);
+		
+		f.add(nPanel, BorderLayout.NORTH);
+
+		//center
+		JPanel cPanel = new JPanel();
+		JTextArea area = new JTextArea(30,20);
+		area.setText("여기는 원 넓이를 \n계산하는 과정이 나타닙니다.");
+		area.setEditable(false);
+		area.setBackground(Color.RED);
+
+		cPanel.add(area);
+		f.add(cPanel, BorderLayout.CENTER);
+		
+		
+		//south
+		String[] color = {"red", "blue"};
+		JPanel sPanel = new JPanel(new FlowLayout());
+		
+		JButton cal = new JButton("계산");
+		JComboBox<String> cb = new JComboBox<String>(color);
+		JButton reset = new JButton("리셋");
+		
+		sPanel.add(cal);
+		sPanel.add(cb);
+		sPanel.add(reset);
+		
+		f.add(sPanel, BorderLayout.SOUTH);
+		
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+}
+```
+</details>
+<details>
+<summary>원 넓이 구하기 이벤트 처리</summary>
+  
+```java
+package com.practice;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
+public class test
+{
+	public static void main(String[] args)
+  {
+		JFrame f = new JFrame("원 넓이 구하기");
+		
+		f.setLayout(new BorderLayout());
+		f.setSize(300, 400);
+		
+		//north
+		JPanel nPanel = new JPanel(new GridLayout(3,0));
+		JPanel np1 = new JPanel();
+		JPanel np2 = new JPanel();
+		JPanel np3 = new JPanel();
+		
+		JLabel l1 = new JLabel("원의 반지름");
+		JTextField t1 = new JTextField(10);
+		
+		JLabel l2 = new JLabel("원의 넓이");
+		JTextField t2 = new JTextField(10);
+		
+		JScrollBar bar = new JScrollBar(JScrollBar.HORIZONTAL);
+		bar.setValues(50, 10, 0, 100);
+				
+		np1.add(l1);
+		np1.add(t1);
+		np2.add(l2);
+		np2.add(t2);
+		
+		np3.add(bar);
+		
+		nPanel.add(np1);
+		nPanel.add(np2);
+		nPanel.add(np3);
+		
+		f.add(nPanel, BorderLayout.NORTH);
 
+		//center
+		JPanel cPanel = new JPanel();
+		JTextArea area = new JTextArea(30,20);
+		area.setText("여기는 원 넓이를 \n계산하는 과정이 나타닙니다.");
+		area.setEditable(false);
+		area.setBackground(Color.LIGHT_GRAY);
+
+		cPanel.add(area);
+		f.add(cPanel, BorderLayout.CENTER);
+		
+		//south
+		String[] color = {"red", "blue"};
+		JPanel sPanel = new JPanel(new FlowLayout());
+		
+		JButton cal = new JButton("계산");
+		JComboBox<String> cb = new JComboBox<String>(color);
+		JButton reset = new JButton("리셋");
+		
+		sPanel.add(cal);
+		sPanel.add(cb);
+		sPanel.add(reset);
+		
+		f.add(sPanel, BorderLayout.SOUTH);
+		
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+
+		cal.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+      {
+				String str = t1.getText();
+				
+				if(str.equals("") == true)
+				{
+					// error 
+					area.setText("반지름을 입력해주세요");
+					JOptionPane.showMessageDialog(f, "반지름을 입력해주세요");
+				}
+				else
+				{
+					int r;
+					r = Integer.parseInt(str);
+					double s;
+					s = 3.14*r*r;
+					str = String.format("%5.3f", s);
+					t2.setText(str);	
+				}
+			}
+		});
+		
+		reset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+      {
+				t1.setText("");
+				t2.setText("");
+				area.setText("");
+			}
+		});
+
+		cb.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e)
+      {
+				int index = ((JComboBox<String>)cb).getSelectedIndex();
+        
+				if(index == 0)
+				{
+					area.setForeground(Color.RED);
+				}
+				else if(index == 1)
+				{
+					area.setForeground(Color.BLUE);
+				}
+			}
+		});
+		
+		
+		f.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e)
+      {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e)
+      {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e)
+      {
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e)
+      {
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e)
+      {
+				System.out.println("마우스 클릭");
+			}
+		});
+		
+		f.addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			public void mouseMoved(MouseEvent e)
+      {
+				System.out.println("마우스이동("+e.getX()+","+e.getY()+")");
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e)
+      {
+			}
+		});
+		
+		
+		bar.addAdjustmentListener(new AdjustmentListener() {
+			@Override
+			public void adjustmentValueChanged(AdjustmentEvent e)
+      {
+				int v = e.getValue();
+				t1.setText(String.valueOf(v));
+			}
+		});
+	}
+}
+```
+</details>
+<details>
+<summary>GUI 활용 자판기 틀</summary>
+  
+```java
+package com.practice;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class test
+{
+	public static void main(String[] args)
+  {
+		JFrame f = new JFrame("자판기");
+		f.setLayout(new BorderLayout());
+		f.setSize(500, 800);
+
+		//north
+		JPanel nPanel = new JPanel(new FlowLayout());
+		JLabel l1 = new JLabel();
+		Font fnt1 = new Font("맑은 고딕", Font.BOLD, 40);
+		l1.setFont(fnt1);
+		l1.setText("자판기");
+
+		nPanel.add(l1);
+		f.add(nPanel, BorderLayout.NORTH);
+    
+		//center
+		JPanel cPanel = new JPanel(new GridLayout(3,3));
+		JButton bt1 = new JButton("메뉴1");
+		JButton bt2 = new JButton("메뉴2");
+		JButton bt3 = new JButton("메뉴3");
+		JButton bt4 = new JButton("메뉴4");
+		JButton bt5 = new JButton("메뉴5");
+		JButton bt6 = new JButton("메뉴6");
+		JButton bt7 = new JButton("메뉴7");
+		JButton bt8 = new JButton("메뉴8");
+		JButton bt9 = new JButton("메뉴9");
+    
+  	cPanel.add(bt1);
+  	cPanel.add(bt2);
+  	cPanel.add(bt3);
+  	cPanel.add(bt4);
+  	cPanel.add(bt5);
+  	cPanel.add(bt6);
+  	cPanel.add(bt7);
+  	cPanel.add(bt8);
+  	cPanel.add(bt9);
+  	
+		f.add(cPanel,BorderLayout.CENTER);
+		
+		//south
+		JPanel sPanel = new JPanel(new GridLayout(2,0));
+		JPanel sp1 = new JPanel();
+		JPanel sp2 = new JPanel();
+		
+		JLabel l2 = new JLabel("");
+		JTextField t1 = new JTextField(15);
+		JButton bt_input = new JButton("입력");
+		JButton bt_return = new JButton("반환");
+		
+		sp1.add(l2);
+		sp1.add(t1);
+		sp1.add(bt_input);
+		sp1.add(bt_return);
+		
+		JLabel l3 = new JLabel("잔돈");
+		JTextField t2 = new JTextField(15);
+		sp2.add(l3);
+		sp2.add(t2);
+		
+		sPanel.add(sp1);
+		sPanel.add(sp2);
+		
+		f.add(sPanel,BorderLayout.SOUTH);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+}
+```
+</details>
+<details>
+<summary>GUI 활용 자판기 메뉴 표시</summary>
+  
+```java
+package com.practice;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+
+public class test
+{
+	public static void main(String[] args) throws Exception
+  {
+		File file = new File("c:\\Temp\\menu.txt");
+		boolean isExists = file.exists();
+		
+		int numItems;
+		int[] menu_num;
+		String[] menu_title;
+		int[] menu_price;
+
+		Scanner in2 = new Scanner(file);
+
+		// file 확인
+		numItems = in2.nextInt();
+		menu_num = new int[numItems];
+		menu_title = new String[numItems];
+		menu_price = new int[numItems];
+
+		for(int i=0; i<numItems; i++)
+		{
+			menu_num[i] = in2.nextInt();
+			menu_title[i] = in2.next();
+			menu_price[i] = in2.nextInt();
+		}
+    
+		in2.close();
+		
+		JFrame f = new JFrame("자판기");
+		f.setLayout(new BorderLayout());
+		f.setSize(500, 800);
+
+		//north
+		JPanel nPanel = new JPanel(new FlowLayout());
+		JLabel l1 = new JLabel();
+		Font fnt1 = new Font("맑은 고딕", Font.BOLD, 40);
+		l1.setFont(fnt1);
+		l1.setText("자판기");
+
+		nPanel.add(l1);
+		f.add(nPanel, BorderLayout.NORTH);
+
+		//center
+		JPanel cPanel = new JPanel(new GridLayout(3,3));
+
+		JButton[] bt = new JButton[9];
+		Font fnt2 = new Font("맑은 고딕", Font.BOLD, 20);
+		
+		for(int i=0; i<9; i++)
+		{
+			if(numItems > i)
+			{
+				bt[i] = new JButton(menu_title[i]);
+				bt[i].setFont(fnt2);
+				bt[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e)
+          {
+						String str = e.getActionCommand();
+						str = str + "를 고르셨습니다.";
+						JOptionPane.showMessageDialog(f, str);
+					}
+				});
+			}
+			else
+			{
+				bt[i] = new JButton("");
+			}
+			cPanel.add(bt[i]);
+		}
+
+		f.add(cPanel,BorderLayout.CENTER);
+		
+		//south
+		JPanel sPanel = new JPanel(new GridLayout(2,0));
+		JPanel sp1 = new JPanel();
+		JPanel sp2 = new JPanel();
+		
+		JLabel l2 = new JLabel("");
+		JTextField t1 = new JTextField(15);
+		JButton bt_input = new JButton("입력");
+		JButton bt_return = new JButton("반환");
+		
+		sp1.add(l2);
+		sp1.add(t1);
+		sp1.add(bt_input);
+		sp1.add(bt_return);
+		
+		JLabel l3 = new JLabel("잔돈");
+		JTextField t2 = new JTextField(15);
+    
+		sp2.add(l3);
+		sp2.add(t2);
+		sPanel.add(sp1);
+		sPanel.add(sp2);
+
+		f.add(sPanel,BorderLayout.SOUTH);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+}
+```
+</details>
+<details>
+<summary>GUI 활용 자판기 계산</summary>
+  
+```java
+package com.practice;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+
+public class test
+{
+	static int sel_bt_no=0;
+	static int money=0;
+	
+	public static void main(String[] args) throws Exception
+  {
+		File file = new File("c:\\Temp\\menu.txt");
+		boolean isExists = file.exists();
+		
+		int numItems;
+		int[] menu_num;
+		String[] menu_title;
+		int[] menu_price;
+
+		Scanner in2 = new Scanner(file);
+
+		// file 확인
+		numItems = in2.nextInt();
+		menu_num = new int[numItems];
+		menu_title = new String[numItems];
+		menu_price = new int[numItems];
+
+		for(int i=0; i<numItems; i++)
+		{
+			menu_num[i] = in2.nextInt();
+			menu_title[i] = in2.next();
+			menu_price[i] = in2.nextInt();
+		}
+    
+		in2.close();
+		
+		JFrame f = new JFrame("자판기");
+		f.setLayout(new BorderLayout());
+		f.setSize(500, 800);
+
+		JTextField t2 = new JTextField(15);
+		
+		//north
+		JPanel nPanel = new JPanel(new FlowLayout());
+		JLabel l1 = new JLabel();
+		Font fnt1 = new Font("맑은 고딕", Font.BOLD, 40);
+		l1.setFont(fnt1);
+		l1.setText("자판기");
+
+		nPanel.add(l1);
+		f.add(nPanel, BorderLayout.NORTH);
+
+		//center
+		JPanel cPanel = new JPanel(new GridLayout(3,3));
+
+		JButton[] bt = new JButton[9];
+		Font fnt2 = new Font("맑은 고딕", Font.BOLD, 20);
+		
+		for(int i=0; i<9; i++)
+		{
+			if(numItems > i)
+			{
+				bt[i] = new JButton(menu_title[i]);
+				bt[i].setFont(fnt2);
+				bt[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e)
+          {
+						String str = e.getActionCommand();
+						JOptionPane.showMessageDialog(f, str);
+            
+						for(int j=0; j<numItems;j++)
+						{
+							if(str.equals(menu_title[j]))
+							{
+								sel_bt_no = j;
+							}
+						}
+						
+						System.out.println(menu_title[sel_bt_no]+"의 가격은"+String.valueOf(menu_price[sel_bt_no])+"원 입니다.");
+						money -= menu_price[sel_bt_no];
+						t2.setText(String.valueOf(money));
+					}
+				});
+			}
+			else
+			{
+				bt[i] = new JButton("");
+			}
+			cPanel.add(bt[i]);
+			bt[i].setEnabled(false);
+		}
+
+		f.add(cPanel,BorderLayout.CENTER);
+		
+		//south
+		JPanel sPanel = new JPanel(new GridLayout(2,0));
+		JPanel sp1 = new JPanel();
+		JPanel sp2 = new JPanel();
+		
+		JLabel l2 = new JLabel("");
+		JTextField t1 = new JTextField(15);
+		JButton bt_input = new JButton("입력");
+		JButton bt_return = new JButton("반환");
+		
+		sp1.add(l2);
+		sp1.add(t1);
+		sp1.add(bt_input);
+		sp1.add(bt_return);
+		
+		JLabel l3 = new JLabel("잔돈");
+
+		sp2.add(l3);
+		sp2.add(t2);
+		sPanel.add(sp1);
+		sPanel.add(sp2);
+		
+		f.add(sPanel,BorderLayout.SOUTH);
+	
+		bt_input.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+      {
+				money += Integer.parseInt(t1.getText());
+				
+				if(money >= 100)
+				{
+					for(int i = 0; i<numItems;i++)
+					{
+						bt[i].setEnabled(true);
+					}
+				}
+				
+				t2.setText(String.valueOf(money));
+			}
+		});
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+}
+```
+</details>
+<details>
+<summary>자판기 메뉴 수정</summary>
+  
+```java
+package com.practice;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class test
+{
+	static int sel_bt_no=0;
+	static int money=0;
+	static int min_price=0;
+	
+	public static void main(String[] args) throws Exception
+  {
+		File file = new File("c:\\Temp\\menu.txt");
+		boolean isExists = file.exists();
+    
+		int numItems;
+		int[] menu_num;
+		String[] menu_title;
+		int[] menu_price;
+    
+		Scanner in2 = new Scanner(file);
+
+		// file 확인
+		numItems = in2.nextInt();
+		menu_num = new int[numItems];
+		menu_title = new String[numItems];
+		menu_price = new int[numItems];
+
+		for(int i=0; i<numItems; i++)
+		{
+			menu_num[i] = in2.nextInt();
+			menu_title[i] = in2.next();
+			menu_price[i] = in2.nextInt();
+		}
+    
+		in2.close();
+		min_price = menu_price[0];
+    
+		for(int i=1; i<numItems; i++)
+		{
+			if(min_price > menu_price[i])
+			{
+				min_price = menu_price[i];
+			}
+		}
+		
+		JFrame f = new JFrame("자판기");
+		f.setLayout(new BorderLayout());
+		f.setSize(500, 800);
+		JTextField t2 = new JTextField(15);
+		
+		//north
+		JPanel nPanel = new JPanel(new FlowLayout());
+		JLabel l1 = new JLabel();
+		Font fnt1 = new Font("맑은 고딕", Font.BOLD, 40);
+		l1.setFont(fnt1);
+		l1.setText("자판기");
+
+		nPanel.add(l1);
+		f.add(nPanel, BorderLayout.NORTH);
+
+		//center
+		JPanel cPanel = new JPanel(new GridLayout(3,3));
+
+		JButton[] bt = new JButton[9];
+		Font fnt2 = new Font("맑은 고딕", Font.BOLD, 20);
+		
+		for(int i=0; i<9; i++)
+		{
+			if(numItems > i)
+			{
+				bt[i] = new JButton(menu_title[i]);
+				bt[i].setFont(fnt2);
+				bt[i].addActionListener(new ActionListener()
+        {
+					@Override
+					public void actionPerformed(ActionEvent e)
+          {
+						String str = e.getActionCommand();
+						JOptionPane.showMessageDialog(f, str);
+            
+						for(int j=0; j<numItems;j++)
+						{
+							if(str.equals(menu_title[j]))
+							{
+								sel_bt_no = j;
+							}
+						}
+						
+						System.out.println(menu_title[sel_bt_no]+"의 가격은"+String.valueOf(menu_price[sel_bt_no])+"원 입니다.");
+						
+						if(money >= menu_price[sel_bt_no])
+						{
+							money -= menu_price[sel_bt_no];
+							t2.setText(String.valueOf(money));
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(f,  "돈이 부족합니다.");
+						}
+					}
+				});
+			}
+			else
+			{
+				bt[i] = new JButton("");
+			}
+			cPanel.add(bt[i]);
+			bt[i].setEnabled(false);
+		}
+    
+		f.add(cPanel,BorderLayout.CENTER);
+    
+		//south
+		JPanel sPanel = new JPanel(new GridLayout(2,0));
+		JPanel sp1 = new JPanel();
+		JPanel sp2 = new JPanel();
+		
+		JLabel l2 = new JLabel("");
+		JTextField t1 = new JTextField(15);
+		JButton bt_input = new JButton("입력");
+		JButton bt_return = new JButton("반환");
+		
+		sp1.add(l2);
+		sp1.add(t1);
+		sp1.add(bt_input);
+		sp1.add(bt_return);
+		
+		JLabel l3 = new JLabel("잔돈");
+
+		sp2.add(l3);
+		sp2.add(t2);
+		sPanel.add(sp1);
+		sPanel.add(sp2);
+		f.add(sPanel,BorderLayout.SOUTH);
+    
+		bt_input.addActionListener(new ActionListener()
+    {
+			@Override
+			public void actionPerformed(ActionEvent e)
+      {
+				money += Integer.parseInt(t1.getText());
+				t1.setText("");
+				
+				if(money >= min_price)
+				{
+					for(int i = 0; i<numItems;i++)
+					{
+						bt[i].setEnabled(true);
+					}
+				}
+				
+				t2.setText(String.valueOf(money));
+			}
+		});
+		
+		
+		bt_return.addActionListener(new ActionListener()
+    {
+			@Override
+			public void actionPerformed(ActionEvent e)
+      {
+			}
+		});
+
+		
+		JMenuBar mbar = new JMenuBar();
+		JMenu menu1 = new JMenu("관리자 메뉴");
+		JMenuItem m1_item1 = new JMenuItem("기존 메뉴 수정");
+		JMenuItem m1_item2 = new JMenuItem("신규 메뉴 추가");
+		JMenuItem m1_item3 = new JMenuItem("종료");
+		menu1.add(m1_item1);
+		menu1.add(m1_item2);
+		menu1.addSeparator();
+		menu1.add(m1_item3);
+		mbar.add(menu1);
+
+		f.setJMenuBar(mbar);
+
+		JDialog editDialog = new JDialog(f, "기존 메뉴 수정", true);
+		editDialog.setSize(400, 300);
+		
+		JPanel dpanel = new JPanel(new GridLayout(2,0));
+		JPanel dp1 = new JPanel(new GridLayout(2,3));
+		JPanel dp2 = new JPanel(new FlowLayout());
+		
+		JLabel dl1 = new JLabel("메뉴");
+		JLabel dl2 = new JLabel("이름");
+		JLabel dl3 = new JLabel("가격");
+		
+		dp1.add(dl1);
+		dp1.add(dl2);
+		dp1.add(dl3);
+		
+		JComboBox<String> dcb = new JComboBox<String>();
+    
+		for(int i = 0; i<numItems;i++)
+		{
+			dcb.addItem( String.valueOf(menu_num[i]) );
+		}
+		
+		dp1.add(dcb);
+		
+		JTextField dt1 = new JTextField(10);
+		JTextField dt2 = new JTextField(10);
+				
+		dp1.add(dt1);
+		dp1.add(dt2);
+	
+		
+		JButton btDialog = new JButton("확인");
+		dp2.add(btDialog);
+    
+		dpanel.add(dp1);
+		dpanel.add(dp2);
+		
+		editDialog.add(dpanel);
+		
+		m1_item1.addActionListener(new ActionListener()
+    {
+			@Override
+			public void actionPerformed(ActionEvent e)
+      {
+        //JOptionPane.showMessageDialog(f, e.getActionCommand());
+				editDialog.setVisible(true);
+			}
+		});
+		
+		btDialog.addActionListener(new ActionListener()
+    {
+			@Override
+			public void actionPerformed(ActionEvent e)
+      {
+				int dcb_idx = dcb.getSelectedIndex();
+				menu_title[dcb_idx] = dt1.getText();
+				menu_price[dcb_idx] = Integer.parseInt(dt2.getText());
+				
+				FileWriter fw;
+        
+				try {
+					fw = new FileWriter("c:\\Temp\\menu.txt");
+					String out="";
+					out = String.format("%d\r\n", numItems );
+					fw.write(out);
+					
+					for(int i=0;i<numItems;i++)
+					{
+						out = String.format("%d %s %d\r\n",menu_num[i],menu_title[i], menu_price[i]);
+						fw.write(out);
+					}
+					
+					fw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				editDialog.dispose();
+			}
+		});
+    
+		dcb.addItemListener(new ItemListener()
+    {	
+			@Override
+			public void itemStateChanged(ItemEvent e)
+      {
+				int index = ((JComboBox<String>)dcb).getSelectedIndex();
+				dt1.setText( menu_title[index]);
+				dt2.setText( String.valueOf(menu_price[index]) );
+			}
+		});;
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+}
+```
+</details>
+
+## 테스트
+<details>
+<summary></summary>
+  
+```java
+
+```
+</details>
+<details>
+<summary></summary>
+  
+```java
+
+```
+</details>
+<details>
+<summary></summary>
+  
+```java
+
+```
+</details>
