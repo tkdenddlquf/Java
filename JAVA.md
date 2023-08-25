@@ -1343,6 +1343,351 @@
   // 예외타입을 Exception으로 설정후 에러 발생시 "오류 메시지" 문장 출력
   ```
 
-## 파일 입출력
+## GUI
+- 소개
+  - Graphic User Interface의 약자로 TUI(Text User Interface)와 반대 개념
+  - GUI 응용 프로그램은 키보드뿐 아니라 마우스 사용 지원, 화려하고 다양한 화면과 더불어 사용자가 자유롭게 화면 작동 가능
+  - 그래픽의 사전적 의미는 상품화, 정보 제공, 엔터테인먼트 등을 벽, 캔버스, 컴퓨터 화면, 종이 같은 표면에 나타내는 시각적 표현
+  - 그래픽은 문자나 숫자보다 더 빠르고 쉽게 정보를 전달할 수 있기 때문에 컴퓨터 분야에서 매우 중요
+  - 비교적 최근에 출시된 자바는 초기 버전부터 그래픽을 고려해서 설계
+- 기본 GUI 화면
+  - AWT
+    - 운영체제가 제공하는 네이티브 UI컴포넌트를 이용하는 자바 라이브러리
+    - 중량 컴포넌트라고 하며, 운영체제에 따라 외형이 다름
+  - 스윙
+    - 운영체제의 도움을 받지 않고 순수하게 자바로 작성되어 있기 때문에 스윙 컴포넌트를 경량 컴포넌트라고 함
+    - 모든 스윙 컴포넌트는 AWT컴포넌트와 완전히 호환
+  - JavaFX
+    - RIA 시장을 장악하고 있던 어도비의 플래시와 MS의 실버라이트에 대항
+    - 처음에는 JavaFX스크립트라는 별도의 언어로 개발되어서 불편
+    - 2011년 JavaFX 2.0은 순수한 자바로 개발되었고 JavaFX 2.2는 JDK와 JRE에 포함
+    - JavaFX의 장점을 포함하려면 밑바닥부터 다시 설계해야 한다는 부담감 때문에 현재는 스윙과 JavaFX가 양존
+- 스윙을 이용한 GUI
+  - 컴포넌트와 컨테이너
+    - 개념
+      - 컴포넌트
+        - 버튼,  레이블,  텍스트  필드  등 GUI를  작성하는  기본적인  빌딩  블록을 의미
+        - 사용자 인터페이스를 생성하는 객체로, 윈도우 시스템에서는 컨트롤에 해당
+      - 컨테이너
+        - 컴포넌트를  부착하는  특수한  컴포넌트를  의미
+        - 컴포넌트를 부착할 수 있는 프레임이나 패널 등이 대표적인 컨테이너  클래스
+    - 생성과 추가
+      - 컨테이너는 내부의 배치 관리자를 사용해 컴포넌트 위치를 결정하고 자신에게 부착
+      - 스윙 애플리케이션을 작성하려면 스윙 애플리케이션의 최상위 컨테이너인 프레임을 생성 필요
+    - JFrame
+      - 복잡한 구조로 구성되어 있지만, 개발자가 자주 접하는 부분은 메뉴바와 컨텐트페인
+      - 생성자
+        ```java
+        JFrame(); // 타이틀이 없는 JFrame 객체 생성
+        JFrame(String title) // title이라는 타이틀의 JFrame 객체 생성
+        ```
+      - 주요 메서드
+        |메서드|설명|
+        |-|-|
+        |Container getContentPane()|프레임의 컨텐트페인 객체 반환|
+        |void pack()|컴포넌트를 부착하기에 적절한 윈도우 크기로 조절|
+        |void setDefaultCloseOperation(int operation)|닫기 버튼을 클릭할 때 기본 작동 결정|
+        |void setIconImage(Image image)|윈도우 아이콘 설정|
+        |void setLayout(LayoutManager manager)|윈도우의 배치 관리자 설정|
+        |void setJMenuBar(JMenuBar menubar)|프레임의 메뉴바를 주어진 메뉴바로 지정|
+        - 이외에도 Component 클래스가 제공하는 add(), Window 클래스가 제공하는 setVisible(), Frame 클래스가 제공하는 setResizable() 등도 자주 사용
+      - 사용 가능한 상수
+        |상수|설명|
+        |-|-|
+        |DISPOSE_ON_CLOSE|종료할 때 모든 자원 반납|
+        |DO_NOTHING_ON_CLOSE|종료할 때 아무 일도 하지 않음|
+        |EXIT_ON_CLOSE|종료할 때 애플리케이션도 강제 종료|
+        |HIDE_ON_CLOSE|종료할 때 창을 숨김|
+      - 프레임에 컴포넌트 추가
+        - 스윙 컴포넌트를 프레임에 부착하려면 Container 클래스가 제공하는 add() 메서드를 호출
+- 컴포넌트 배치
+  - 배치 관리자의 역할
+    - 부착할 컴포넌트 위치를 결정해서 적절히 배치하며, 컨테이너의 크기가 변하면 컴포넌트를 재배치
+  - 배치 관리자 설정 및 제거
+    ```java
+    setLayout(new GridLayout()); // GridLayout으로 배치 관리자 변경
+    setLayout(null); // 배치 관리자 제거
+    ```
+  - 컨테이너와 기본 배치 관리자
+    - 컨테이너
+      - JDiallog
+      - JFrame
+      - JWindow
+      - JApplet
+      - JPanel
+    - 기본 배치 관리자
+      - BorderLayout
+        - 영역에 컴포넌트 추가하기 위한 메서드
+      - FlowLayout
+        - 컴포넌트 정렬을 위한 메서드
+  - GridLayout 배치 관리자
+    - GridLayout객체를 생성할 때 행과 열의 개수를 0이상의 정수로 명시
+    - 행이나 열의 값이 0이면 필요한 만큼의 행이나 열을 생성. 그러나 행과 열의 개수로 동시에 0은 사용 금지
+  - CardLayout 배치 관리자
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |void first(Container parent)|첫 번째 컴포넌트 선택|
+      |void next(Container parent)|다음 컴포넌트 선택|
+      |void previous(Container parent)|이전 컴포넌트 선택|
+      |void last(Container parent)|마지막 컴포넌트 선택|
+  - 배치 관리자 없이 컴포넌트 배치
+    - 배치 관리자가 없을 때는 절대 좌표로 컴포넌트를 배치
+    - 플랫폼 환경이 다르거나 프레임의 크기가 변경되는 등 외부 원인으로 컴포넌트 크기와 위치가 의도와는 다르게 나타날 수 있음
+    - 컴포넌트의 크기와 위치를 setSize()와 setLocation(), setBounds() 메서드를 이용해 개발자가 지정하는 번거로움을 감수
+- 주요 컴포넌트
+  - AWT 패키지와 스윙 패키지
+    - GUI 프로그래밍을 위한 헬퍼 클래스
+      - 그래픽, 색상, 폰트, 레이아웃 배치 관리자 등은 java.awt 패키지의 가족
+      - 클래스를 이용하려면 java.awt 패키지 임포트 필요
+    - 자주 사용하는 AWT 패키지
+      - java.awt : AWT의 GUI 컴포넌트, 색상, 폰트, 그래픽, 레이아웃 배치 관리자 등 관련된 클래스를 포함
+      - java.awt.event : AWT와 스윙의 이벤트 클래스, 각종 리스너 인터페이스, 어댑터 클래스를 포함
+      - java.awt.color, java.awt.font, java.awt.image 등
+    - 스윙 패키지와 하부 패키지
+      - javax.swing : 기본적인 GUI 관련 클래스를 포함
+      - javax.swing.border : Border 인터페이스와 각종 구현 클래스를 포함
+      - javax.swing.event : 스윙에 추가된 각종 이벤트 클래스와 리스너 인터페이스를 포함
+      - javax.swing.tree : 스윙의 트리를 지원하는 인터페이스와 각종 구현 클래스를 포함
+  - Component 클래스
+    - 컴포넌트의 공통 속성과 크기, 모양, 색상, 폰트, 이동, 삭제, 이벤트 처리 등을 수행할 수 있는 메서드를 제공
+      |메서드|설명|
+      |-|-|
+      |Color getBackground()|컴포넌트의 배경색 반환|
+      |Color getForeground()|컴포넌트의 전경색 반환|
+      |Graphics getGraphics()|컴포넌트의 그래픽 컨텍스트 반환|
+      |String getName()|컴포넌트의 이름 반환|
+      |Container getParent()|컴포넌트를 포함하는 컨테이너 반환|
+      |Dimension getSize()|컴포넌트의 크기 반환|
+      |void setBackground(Color c)|컴포넌트의 배경색 설정|
+      |void setEnabled(boolean b)|컴포넌트를 활성화 비활성화 함|
+      |void setFont(Font f)|컴포넌트의 폰트 설정|
+      |void setForeground(Color)|컴포넌트의 전경색 설정|
+      |void setLocation(Point p)|컴포넌트의 위치 설정|
+      |void setSize(Dimension d)|컴포넌트의 크기 설정|
+      |void setVisible(boolean b)|컴포넌트를 화면체 포시하거나 숨김|
+  - Container 클래스
+    - 다른 컨테이너 내부에 포함될 수 없는 최상위 컨테이너인 프레임, 다이얼로그, 애플릿
+    - 다른 컨테이너에 포함될 수 있는 패널 또는 스크롤페인 등
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |Component add(Component comp)|컨테이너에 컴포넌트 부착|
+      |Component add(Component comp, int index)|컨테이너에 컴포넌트를 명시한 위치에 부착|
+      |void add(Component component, Object constraints)|크기와 위치(Object)를 사용해 컨테이너에 컴포넌트 부착|
+      |Insets getInsets()|컨테이너의 여백을 의미하는 인셋 반환|
+      |void remove(Component comp)|컴포넌트를 컨테이너에서 제거|
+      |void remove(int index)|명시된 위치의 컴포넌트 제거|
+      |void setLayout(LayoutManager mgr)|컨테이너의 배치 관리자 설정|
+- 주요 스윙 컴포넌트
+  - JComponent 클래스
+    - 모든  스윙  컴포넌트의  부모  클래스
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |Border getBorder()|보더 반환|
+      |Dimension getPreferredSize()|크기 반환|
+      |String getToolTipText()|툴팁에 설정된 문자열 반환|
+      |void setBorder(Border border)|보더 설정|
+      |void setOpaque(boolean isOpaque)|투명 여부 설정|
+      |void setPreterredSize(Dimension preferredSize)|크기 설정|
+      |void setToolTipText(String text)|툴팁을 문자열로 설정|
+  - JLabel
+    - 이벤트와 관계없이 단순히 텍스트나 이미지를 표시
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |Icon getIcon()|레이블이 가진 아이콘 반환|
+      |String getText()|레이블이 가진 문자열 반환|
+      |void setIcon(Icon icon)|레이블에 명시된 아이콘 설정|
+      |void setText(String text)|레이블에 명시된 문자열 설정|
+  - JButton
+    - 사용자가 직접 작동해서 제어할 수 있는 컴포넌트 중 하나
+    - 사용자가 클릭하면 ActionEvent를 발생
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |Icon getIcon()|설정된 이미지 반환|
+      |String getText()|설정된 문자열 반환|
+      |void setIcon(Icon icon)|버튼의 이미지 설정|
+      |void setMnemonic(char mnemonic)|단축키 문자 설정|
+      |void setText(String text)|버튼의 문자열 설정|
+  - JTextField
+    - 한 행짜리 문자열 입력 창을 만드는 컴포넌트로, JTextArea 및 JEditPane과 함께 JTextComponent의 자식 클래스
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |int getCaretPosition()|문자열이 삽입될 캐럿의 위치 반환|
+      |int getColumns()|텍스트 필드에 설정된 열의 개수 반환|
+      |String getText()|텍스트 필드에 포함된 문자열 반환|
+      |void setEditable(boolean b)|텍스트 필드의 편집 여부 설정|
+      |void setColumns(int columns)|텍스트 필드의 열 개수 설정|
+      |void setFont(Font f)|텍스트 필드의 폰트 설정|
+      |void setText(String text)|주어진 문자열로 설정|
+  - JTextArea
+    - 여러 행에 걸쳐 문자열을 입력하거나 편집할 수 있는 스윙 컴포넌트
+    - 사용자가 문자열을 입력한 후  엔터 키를 누르면 ActionEvent가 발생
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |void append(String str)|주어진 문자열을 문서 끝에 추가|
+      |int getLineCount()|행 개수 반환|
+      |String getText()|텍스트 영역에 포함된 문자열 반환|
+      |void insert(String str, int pos)|주어진 문자열을 pos 위치에 삽입|
+      |void replaceRange(String str, int start, int end)|주어진 문자열로 start와 end 사이의 문자열 교체|
+      |void setEditable(boolean b)|텍스트 영역의 편집 여부 설정|
+      |void setFont(Font f)|주어진 폰트로 설정|
+      |void setRows(int rows)|주어진 행 개수로 설정|
+  - JComboBox
+    - 다수의 항목 중에 하나를 선택하며, 컴포넌트에 텍스트와 이미지를 추가 가능
+    - 항목을 선택하면 ActionEvent 발생, 항목을 변경하면 ItemEvent 발생
+    - 메서드
+      |메서드|설명|
+      |-|-|
+      |void addItem(E item)|지정한 항목을 목록에 추가|
+      |E getItem(int index)|지정한 인덱스의 항목을 목록에서 반환|
+      |void insertItemAt(E item, int index)|지정한 항목을 지정한 인덱스에 추가|
+      |void removeItem(Object anObject)|지정한 항목을 목록에서 제거|
+      |void removeItemAt(int anIndex)|지정한 인덱스의 항목을 목록에서 제거|
+
+## 이벤트 처리
+- 이벤트의 개념과 처리 과정
+  - 윈도우 시스템에서 사용자의 움직임을 애플리케이션에 전달하는 일종의 신호
+  - GUI 프로그램은 이벤트가 실행 흐름을 결정하는 이벤트 구동 방식
+  - 이벤트 리스너는 발생한 이벤트를 처리하는 객체
+  - 이벤트 핸들러는 이벤트를 처리하는 이벤트 리스너의 멤버 메서드
+- 이벤트 클래스와 이벤트 리스너
+  - 이벤트 클래스
+    - 이벤트 처리에 필요한 많은 정보를 제공
+    - 예를 들어 사용자가 마우스를 클릭하면 클릭 여부, 클릭된 컴포넌트, 클릭된 위치 등과 같은 정보를 제공
+    - 종류
+      - 의미 이벤트
+        - 버튼 클릭처럼 사용자가 의도하는 이벤트를 의미
+        - 일부 스윙 컴포넌트에서만 발생
+          > ActionEvent, AdjustmentEvent, ItemEvent, TextEvent 등
+      - 저수준 이벤트
+        - 의미 이벤트를 가능하게 하는 이벤트를 의미
+          > 버튼 클릭은 마우스 이동, 마우스 누름, 마우스 놓기 등 여러 단계의 세부적인 이벤트로 구성
+        - 모든 스윙 컴포넌트에서 발생
+          > ComponentEvent, ContainerEvent, FocusEvent, MouseEvent, KeyEvent 등
+    - 주요 이벤트의 메서드와 상수
+      - EventObject
+        |메서드 또는 상수|설명|
+        |-|-|
+        |Object getSource()|발생한 이벤트 반환, 반환 타입이 Object이므로 사용 시 타입 변환 필요|
+      - AWTEvent
+        |메서드 또는 상수|설명|
+        |-|-|
+        |int getID()|AWT 이벤트의 id 속성을 조사해서 반환|
+        |String paramString()|이벤트의 상태를 문자열로 반환|
+      - ItemEvent
+        |메서드 또는 상수|설명|
+        |-|-|
+        |static int DESELECTED|항목의 선택 해제|
+        |static int ITEM_STATE_CHANGED|항목의 상태 변경|
+        |static int SELECTED|항목을 선택|
+        |Object getItem()|선택된 항목 반환|
+        |int getStateChanged()|변경된 상태 반환|
+      - WindowEvent
+        |메서드 또는 상수|설명|
+        |-|-|
+        |static int WINDOW_ACTIVATED|윈도우가 활성화된 상태|
+        |static int WINDOW_CLOSED|윈도우가 닫힌 상태|
+        |static int WINDOW_DEICONIZED|아이콘에서 윈도우로 변경된 상태|
+        |static int WINDOW_ICONIZED|윈도우가 아이콘으로 바뀐 상태|
+        |Window getWindow()|이벤트가 발생한 윈도우 반환|
+  - 이벤트 리스너
+    - 이벤트 소스에 이벤트 리스너 등록
+    - 이벤트 리스너는 매우 빠르게 처리되도록 가능한 짧게 작성
+    - 이벤트 리스너가 하나의 스레드로 과다한 작업을 수행한다면 프로그램이 반응하지 않을 수도 있음
+    - 이벤트 처리 시간이 길다면 별도의 스레드에 맡기는 것이 바람직
+    - 이벤트 소스와 이벤트 리스너
+      - 버튼, 리스트, 메뉴 아이템, 텍스트 필드
+        |이벤트|이벤트 리스너|
+        |-|-|
+        |ActionEvent|ActionListener|
+      - 스크롤바
+        |이벤트|이벤트 리스너|
+        |-|-|
+        |AdjustmentEvent|AdjustmentListener|
+      - 체크 박스, 콤보 박스, 리스트
+        |이벤트|이벤트 리스너|
+        |-|-|
+        |ItemEvent|ItemListener|
+      - 컨테이너
+        |이벤트|이벤트 리스너|
+        |-|-|
+        |ContainerEvent|ContainerListener|
+      - 컴포넌트
+        |이벤트|이벤트 리스너|
+        |-|-|
+        |ComponentEvent|ComponentListener|
+        |FocusEvent|FocusListener|
+        |KeyEvent|KeyListener|
+        |MouseEvent|MouseListener, MouseMotionListener|
+      - 윈도우
+        |이벤트|이벤트 리스너|
+        |-|-|
+        |WindowEvent|WindowListener|
+    - 주요 리스너 인터페이스와 추상 메서드
+      |리스너 인터페이스|추상 메서드|
+      |-|-|
+      |ActionListener|void actionPerformed(ActionEvent)|
+      |ItemListener|void ItemStateChanged(ItemEvent)|
+      |AdjustmentListener|void adjustmentValueChanged(AdjustmentEvent)|
+      |KeyListener|void keyPressed(KeyEvent) </br>void keyReleased(KeyEvent) </br>void keyTyped(KeyEvent)|
+      |MouseListener|void mousePressed(MouseEvent) </br>void mouseReleased(MouseEvent) </br>void mouseClicked(MouseEvent) </br>void mouseEntered(MouseEvent) </br>void mouseExited(MouseEvent)|
+      |MouseMotionListener|void mouseDragged(MouseEvent) </br>void mouseMoved(MouseEvent)|
+    - 이벤트 클래스와 주요 메서드
+      - ActionEvent
+        |메서드|설명|
+        |-|-|
+        |String getActionCommand()|액션과 관련된 명령어 문자열 반환|
+        |int getModifiers()|액션이 발생할 때 눌린 변환키의 값 반환|
+      - KeyEvent
+        |메서드|설명|
+        |-|-|
+        |char getKeyChar()|키보드로 입력한 문자 반환|
+        |int getKeyCode()|키보드로 입력한 문자의 코드 정수 값 반환|
+      - MouseEvent
+        - 마우스의 움직임을 추적할 때는 시스템에 상당한 부담을 주기 때문에 자바는 MouseListener 인터페이스와 별도로 MouseMotionListener 인터페이스로 구분해 제공
+        |메서드|설명|
+        |-|-|
+        |int getButton()|상태가 변경된 마우스 버튼 반환|
+        |int getClickCount()|이벤트와 관련된 마우스의 클릭 횟수 반환|
+        |Point getLocationOnScreen()|이벤트가 발생한 위치의 좌표 반환|
+        |static String getMouseModifiersText()|마우스 버튼과 함께 누른 변환키의 텍스트 반환|
+        |int getX()|이벤트가 발생할 때 마우스의 X 좌표 반환|
+        |int getY()|이벤트가 발생할 때 마우스의 Y 좌표 반환|
+      - AdjustmentEvent
+        |메서드|설명|
+        |-|-|
+        |int getValue()|이벤트의 현재 값 반환|
+- 어댑터 클래스
+  - 개발자가 필요한 추상 메서드만 구현하면 되도록 리스너에 대응하는 어댑터 클래스를 제공
+  - 어댑터 클래스는 리스너 인터페이스에 포함된 모든 추상 메서드를 빈 본체로 구현한 클래스에 불과
+  - 리스너 인터페이스와 대응하는 어댑터 클래스
+    |리스너 인터페이스|어댑터 클래스|
+    |-|-|
+    |ComponentListener|ComponentAdapter|
+    |ContainerListener|ContainerAdapter|
+    |FocusListener|FocusAdapter|
+    |KeyListener|KeyAdapter|
+    |MouseListener|MouseAdapter|
+    |MouseMotionListener|MouseMotionAdapter|
+    |WindowListener|WindowAdapter|
+- 이벤트와 메뉴
+  - 메뉴 구성 순서
+    ```java
+    JMenuBar mb = JMenuBar(); // 메뉴 바 생성
+    JMenu menu = new JMenu("File");
+    mb.add(menu); // 메뉴 바에 메뉴 추가
+    JMenuItem item = new JMenuItem("New File");
+    menu.add(item); // 메뉴에 메뉴 항목 추가
+    frame.setJMenuBar(mb); // 프레임에 메뉴바 부착
+    ```
+
+## 실습 파일
+
 
 
