@@ -1650,7 +1650,7 @@
         |char getKeyChar()|키보드로 입력한 문자 반환|
         |int getKeyCode()|키보드로 입력한 문자의 코드 정수 값 반환|
       - MouseEvent
-        - 마우스의 움직임을 추적할 때는 시스템에 상당한 부담을 주기 때문에 자바는 MouseListener 인터페이스와 별도로 MouseMotionListener 인터페이스로 구분해 제공
+        - 마우스의 움직임을 추적할 때는 시스템에 상당한 부담을 주기 때문에 자바는 MouseListener 인터페이스와 별도로 MouseMotionListener 인터페이스로 구분해 제공  
         |메서드|설명|
         |-|-|
         |int getButton()|상태가 변경된 마우스 버튼 반환|
